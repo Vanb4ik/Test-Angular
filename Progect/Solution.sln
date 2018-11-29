@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{1E35B07B-A3AB-49E4-8C8E-A202240B264E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "infrastructure", "infrastructure\infrastructure.csproj", "{F23F0C73-98AB-4951-8644-F1E57889724F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E35B07B-A3AB-49E4-8C8E-A202240B264E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E35B07B-A3AB-49E4-8C8E-A202240B264E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E35B07B-A3AB-49E4-8C8E-A202240B264E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E35B07B-A3AB-49E4-8C8E-A202240B264E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F23F0C73-98AB-4951-8644-F1E57889724F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F23F0C73-98AB-4951-8644-F1E57889724F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F23F0C73-98AB-4951-8644-F1E57889724F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F23F0C73-98AB-4951-8644-F1E57889724F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
