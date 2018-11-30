@@ -1,8 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using infrastructure.DataAccess.Models.Interface;
 
-namespace infrastructure.DataAccsess.Models
+namespace infrastructure.DataAccess.Models
 {
-    public class Position
+    
+    public class Position : IIdentifiable
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using WebApi.Config;
 using WebApi.Configuration;
 
 
@@ -39,6 +40,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .InfrustructureServices(Configuration["PostGreConnectionString"])
                 .Configure<FormOptions>(x =>
                 {
                     x.ValueLengthLimit = int.MaxValue;
@@ -65,6 +67,7 @@ namespace WebApi
             app
                 //.UseApplicationLogging(loggerFactory, Configuration)
                 .UseAuthentication()
+                .MigratePrintDb()
                 .UseStaticFiles(staticFilesOptions)
                 .UseConfiguredCors()
                 .UseMvc();
