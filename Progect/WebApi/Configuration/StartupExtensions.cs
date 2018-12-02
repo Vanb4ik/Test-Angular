@@ -17,7 +17,8 @@ namespace WebApi.Configuration
                 .AddAuthorization(options =>
                     {
                         options.AddPolicy("AdminsOnly", policyUser => { policyUser.RequireClaim("role", "admin"); });
-                        options.AddPolicy("AdminsManagersOnly", policyUser => { policyUser.RequireClaim("role", "manager","admin"); });
+                        options.AddPolicy("AdminsManagersOnly",
+                            policyUser => { policyUser.RequireClaim("role", "manager", "admin"); });
                     }
                 )
                 .AddJsonFormatters();

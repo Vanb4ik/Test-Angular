@@ -4,7 +4,6 @@ using infrastructure.DataAccess.Models.Interface;
 
 namespace infrastructure.DataAccess.Models
 {
-    
     public class Position : IIdentifiable
     {
         public Guid Id { get; set; }

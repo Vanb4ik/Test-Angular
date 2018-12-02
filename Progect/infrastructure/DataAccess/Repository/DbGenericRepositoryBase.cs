@@ -36,6 +36,7 @@ namespace infrastructure.DataAccess.Repository
             {
                 return;
             }
+
             foreach (T entity in enumerable)
             {
                 if (entity.Id == Guid.Empty)
@@ -43,6 +44,7 @@ namespace infrastructure.DataAccess.Repository
                     entity.Id = Guid.NewGuid();
                 }
             }
+
             await _context.Set<T>().AddRangeAsync(enumerable);
             await _context.SaveChangesAsync();
         }
@@ -50,7 +52,7 @@ namespace infrastructure.DataAccess.Repository
 
         public async Task<T> FindAsync(Guid entityID)
         {
-            return await _context.FindAsync<T>(new object[]{entityID});
+            return await _context.FindAsync<T>(new object[] {entityID});
         }
 
         public async Task<IList<T>> GetAllAsync()
@@ -71,7 +73,6 @@ namespace infrastructure.DataAccess.Repository
         public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);
-
         }
 
         public async Task UpdateRangeAsync(IEnumerable<T> entities)

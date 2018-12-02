@@ -6,13 +6,14 @@ using WebApi.Controllers.Domain.Controllers;
 namespace WebApi.Controllers
 {
     [ApiRoute("position")]
-    public class PositionController: AuthorizeWebApiBaseController
+    public class PositionController : AuthorizeWebApiBaseController
     {
         [HttpGet("{categoryId}")]
         public IActionResult Get(Guid cayegoryId)
         {
             return OkContract(new { });
         }
+
         [HttpDelete("{positionId}")]
         public IActionResult Delete(string positionId)
         {

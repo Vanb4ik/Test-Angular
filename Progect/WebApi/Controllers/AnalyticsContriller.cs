@@ -6,14 +6,14 @@ namespace WebApi.Controllers
 {
     [ApiRoute("analytics")]
     [Route("[controller]/[acton]")]
-    public class AnalyticsController: AuthorizeWebApiBaseController
+    public class AnalyticsController : AuthorizeWebApiBaseController
     {
         [HttpGet("{overview}")]
         public IActionResult Overview()
         {
             return OkContract(new { });
         }
-        
+
         [HttpGet("{analytics}")]
         public IActionResult Analytics()
         {

@@ -18,7 +18,7 @@ namespace WebApi
     public class Startup
     {
         public IConfigurationRoot Configuration { get; }
-        
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -27,7 +27,7 @@ namespace WebApi
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            
+
             Console.WriteLine(JsonConvert.SerializeObject(
                 Configuration
                     .AsEnumerable()
@@ -40,7 +40,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .InfrustructureServices(Configuration["PostGreConnectionString"])
+                .InfrustructureServices(Configuration["ConnectionString"])
                 .Configure<FormOptions>(x =>
                 {
                     x.ValueLengthLimit = int.MaxValue;
@@ -63,7 +63,7 @@ namespace WebApi
                     context.Context.Response.Headers.Add("Expires", "-1");
                 }
             };
-            
+
             app
                 //.UseApplicationLogging(loggerFactory, Configuration)
                 .UseAuthentication()

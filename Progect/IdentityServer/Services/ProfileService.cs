@@ -14,9 +14,8 @@ namespace Resolff.APMS.IdentityServer.Customized
 
         public ProfileService(
             ILoggerFactory loggerFactory
-           )
+        )
         {
-           
             _logger = loggerFactory.CreateLogger<ProfileService>();
         }
 
@@ -43,7 +42,7 @@ namespace Resolff.APMS.IdentityServer.Customized
                         var claims = IdentityHelpers.GetUserClaims(user);
                         context.IssuedClaims = claims.Where(x => context.RequestedClaimTypes.Contains(x.Type)).ToList();
                     }
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -60,9 +59,9 @@ namespace Resolff.APMS.IdentityServer.Customized
                 var user = await UserServices.FindAsync(email?.Value);
 
                 if (user != null)
-                {                 
-                    context.IsActive = !user.IsLockedOut;                   
-                }                
+                {
+                    context.IsActive = !user.IsLockedOut;
+                }
             }
             catch (Exception ex)
             {

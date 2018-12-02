@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using infrastructure.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
 namespace infrastructure.DataAccess
 {
     public class PostgresDbContext : DbContext
     {
-        public DbSet<Category> Categories { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }
+
         //public DbSet<Order> Orders { get; set; }
-        public DbSet<Position> Positions { get; set; }
-        public DbSet<User> Users { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Position> Positions { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
 
         public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options)
         {
@@ -91,7 +94,7 @@ namespace infrastructure.DataAccess
                         Role = "user"
                     }
                 };
-                
+
                 Users.AddRange(users);
                 SaveChanges();
             }

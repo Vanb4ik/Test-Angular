@@ -17,18 +17,18 @@ namespace Resolff.APMS.IdentityServer.Customized
         public string[] CountriesId { get; set; }
     }
 
-    
 
     public class UserServices
     {
         public static IList<User> Users { get; set; } = new List<User>();
-        
+
         public static Task<User> FindAsync(string email)
         {
             if (!Users.Any())
             {
-                Users= GetUsers();
-            } 
+                Users = GetUsers();
+            }
+
             return Task.FromResult(
                 Users.FirstOrDefault(m => m.Email == email)
             );
@@ -59,7 +59,7 @@ namespace Resolff.APMS.IdentityServer.Customized
                     Roles = new[] {"manager"},
                     CountriesId = new[] {"ci"},
                 },
-                
+
                 new User()
                 {
                     Email = "operator@i.com",

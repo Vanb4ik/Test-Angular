@@ -21,12 +21,9 @@ namespace WebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel(options => 
-                {
-                    options.Limits.MaxRequestBodySize = null;
-                })
+                .UseKestrel(options => { options.Limits.MaxRequestBodySize = null; })
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseWebRoot("wwwroot") 
+                .UseWebRoot("wwwroot")
                 .UseIISIntegration()
                 .UseUrls("http://*:5000")
                 .UseStartup<Startup>();

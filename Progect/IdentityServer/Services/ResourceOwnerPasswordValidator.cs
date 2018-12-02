@@ -8,8 +8,6 @@ namespace IdentityServer.Services
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-
-
         //this is used to validate your user account with provided grant at /connect/token
         public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
@@ -28,12 +26,13 @@ namespace IdentityServer.Services
                             authenticationMethod: "custom",
                             claims: IdentityHelpers.GetUserClaims(user));
 
-                        return; 
+                        return;
                     }
 
                     context.Result = InvalidGrantResult("Incorrect password");
                     return;
                 }
+
                 context.Result = InvalidGrantResult("User does not exist.");
             }
             catch (Exception e)

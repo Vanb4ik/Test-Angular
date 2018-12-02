@@ -9,7 +9,7 @@ namespace WebApi.Config
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<PostgresDbContext>
     {
         public PostgresDbContext CreateDbContext(string[] args)
-        {            
+        {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
@@ -18,11 +18,10 @@ namespace WebApi.Config
 
             var builder = new DbContextOptionsBuilder<PostgresDbContext>();
 
-            builder.UseSqlServer(configuration["ConnectionString"]
-                , b => b.MigrationsAssembly("Resolff.APBS.WebApp"));            
+            builder.UseNpgsql(configuration["ConnectionString"]
+                , b => b.MigrationsAssembly("WebApi"));
 
             return new PostgresDbContext(builder.Options);
         }
     }
-
 }

@@ -8,8 +8,7 @@ namespace infrastructure.DataAccess.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        [Column(TypeName = "text")]
-        public string ImageSrc { get; set; }
+        [Column(TypeName = "text")] public string ImageSrc { get; set; }
         public Guid UserId { get; set; }
     }
 }

@@ -35,7 +35,6 @@ namespace IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddIdentityServer(_ => _.IssuerUri = Configuration["IdentityServer:IssuerUri"])
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())

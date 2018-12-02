@@ -5,12 +5,12 @@ using WebApi.Controllers.Domain.Controllers;
 namespace WebApi.Controllers
 {
     [ApiRoute("order")]
-    public class OrderController: AuthorizeWebApiBaseController
+    public class OrderController : AuthorizeWebApiBaseController
     {
         [HttpGet]
         public IActionResult Get()
         {
-            return OkContract(new {});
+            return OkContract(new { });
         }
 
         [HttpPost]
