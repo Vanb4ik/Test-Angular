@@ -12,4 +12,7 @@ export class RegisterPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleOnClick(e) {
+
+  }
 }

@@ -3,18 +3,51 @@
     <mat-card-header>
       <mat-card-subtitle>{{title}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content >
-      <form class="example-form">
+    <mat-card-content>
+      <form
+        class="example-form"
+        [formGroup]="form"
+        (submit)="onSubmit()"
+      >
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail" value="">
+          <input
+            matInput
+            required
+            id="email"
+            formControlName="email"
+            placeholder="EMail:"
+            value=""
+          >
+          <mat-error *ngIf="form.get('email').invalid">{{getErrorEmailMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" value="">
+          <input
+            matInput
+            required
+            [type]="isPassword ? 'password' : 'text'"
+            id="password"
+            formControlName="password"
+            placeholder="Password:"
+            value=""
+          >
+          <mat-error *ngIf="form.get('password').invalid">{{getErrorPasswordMessage()}}</mat-error>
+          <mat-icon
+            matSuffix (click)="isPassword = !isPassword"
+          >
+            {{isPassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button nc-ripple mat-raised-button class="mat-button" (click)="handleOk()">{{okText}}</button>
+      <button
+        mat-raised-button
+        (click)="onSubmit()"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        {{okText}}
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
