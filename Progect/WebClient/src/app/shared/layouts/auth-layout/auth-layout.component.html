@@ -1,5 +1,21 @@
 <ng-container>
-  <mat-toolbar color="primary" class="example-header">Header</mat-toolbar>
+  <mat-toolbar color="primary" class="example-header">
+    <a href="/">Header</a>
+
+    <div class="linkWrapper">
+
+        <a routerLinkActive="active"
+           routerLink={{loginPageLink}}
+           class="link"
+        >Авторезуватись</a>
+
+      <a routerLinkActive="active"
+         routerLink={{registerPageLink}}
+         class="link"
+      >Зареєструватись</a>
+    </div>
+
+  </mat-toolbar>
   <mat-sidenav-container class="example-container">
     <mat-sidenav-content>
       <router-outlet></router-outlet>

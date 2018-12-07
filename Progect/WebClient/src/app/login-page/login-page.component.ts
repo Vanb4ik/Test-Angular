@@ -12,4 +12,8 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleOnClick(e) {
+    alert("Handled: " + e)
+  }
+
 }

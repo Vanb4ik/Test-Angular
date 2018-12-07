@@ -47,6 +47,9 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import {AccountWindowComponent} from "./shared/account-window/account-window.component";
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+
 
 
 
@@ -58,7 +61,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     AuthLayoutComponent,
     SiteLayoutComponent,
     AuthLayoutComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    AccountWindowComponent
   ],
   imports: [
     MatInputModule,
@@ -112,8 +116,11 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     MatTooltipModule,
     MatTreeModule,
   ],
+  //entryComponents: [AppComponent],
+  //declarations: [AppComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+//platformBrowserDynamic().bootstrapModule(AppComponent);
