@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using infrastructure.Services;
+using infrastructure.Services.Interfaces;
 using IdentityServer.Services;
 using IdentityServer4.Services;
 using IdentityServer4.Validation;
@@ -9,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Resolff.APMS.IdentityServer.Customized;
 
 namespace IdentityServer
 {
@@ -35,6 +36,8 @@ namespace IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.InfrustructureServices(Configuration["ConnectionString"]);
+            
             services.AddIdentityServer(_ => _.IssuerUri = Configuration["IdentityServer:IssuerUri"])
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())

@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using infrastructure.DataAccess;
 
 namespace WebApi.Migrations
@@ -15,9 +15,9 @@ namespace WebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("infrastructure.DataAccess.Models.Category", b =>
                 {
@@ -59,9 +59,19 @@ namespace WebApi.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("Email");
 
-                    b.Property<string>("Password");
+                    b.Property<bool>("IsApproved");
+
+                    b.Property<bool>("IsLockedOut");
+
+                    b.Property<DateTime>("LasLoginDateTime");
+
+                    b.Property<string>("PasswordHash");
 
                     b.Property<string>("Role");
 

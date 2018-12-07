@@ -11,11 +11,11 @@ namespace infrastructure.DataAccess.Repository
     public class DbGenericRepositoryBase<T> : IRepositoryBase<T>
         where T : class, IIdentifiable
     {
-        private PostgresDbContext _context;
+        public PostgresDbContext Context { get; }
 
         public DbGenericRepositoryBase(PostgresDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         public async Task AddAsync(T entity)
@@ -25,8 +25,8 @@ namespace infrastructure.DataAccess.Repository
                 entity.Id = Guid.NewGuid();
             }
 
-            await _context.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await Context.AddAsync(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
@@ -45,39 +45,39 @@ namespace infrastructure.DataAccess.Repository
                 }
             }
 
-            await _context.Set<T>().AddRangeAsync(enumerable);
-            await _context.SaveChangesAsync();
+            await Context.Set<T>().AddRangeAsync(enumerable);
+            await Context.SaveChangesAsync();
         }
 
 
         public async Task<T> FindAsync(Guid entityID)
         {
-            return await _context.FindAsync<T>(new object[] {entityID});
+            return await Context.FindAsync<T>(new object[] {entityID});
         }
 
         public async Task<IList<T>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await Context.Set<T>().ToListAsync();
         }
 
         public async Task RemoveAsync(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            Context.Set<T>().Remove(entity);
         }
 
         public async Task RemoveRangeAsync(IEnumerable<T> entities)
         {
-            _context.RemoveRange(entities);
+            Context.RemoveRange(entities);
         }
 
         public async Task UpdateAsync(T entity)
         {
-            _context.Update(entity);
+            Context.Update(entity);
         }
 
         public async Task UpdateRangeAsync(IEnumerable<T> entities)
         {
-            _context.UpdateRange(entities);
+            Context.UpdateRange(entities);
         }
     }
 }

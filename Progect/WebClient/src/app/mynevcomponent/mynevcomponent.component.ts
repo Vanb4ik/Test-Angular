@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-mynevcomponent',
   templateUrl: './mynevcomponent.component.html',
-  styleUrls: ['./mynevcomponent.component.sass']
+  styleUrls: ['./mynevcomponent.component.scss']
 })
 export class MynevcomponentComponent implements OnInit {
 
-  private readonly time: string;
-  private readonly someList: string[] = ["A", "B", "C"]
+  private time: string;
+  private readonly someList: string[] = ["A", "B", "C"];
   private  isTrue: boolean = true;
 
   constructor() {

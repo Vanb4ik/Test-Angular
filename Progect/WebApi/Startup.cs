@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using WebApi.Config;
-using WebApi.Configuration;
 
 
 namespace WebApi

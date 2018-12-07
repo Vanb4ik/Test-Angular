@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer.Services;
+using infrastructure.Services.Interfaces;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.Extensions.Logging;
 
-namespace Resolff.APMS.IdentityServer.Customized
+namespace IdentityServer.Services
 {
     public class ProfileService : IProfileService
     {
         private readonly ILogger _logger;
+        private readonly IUserService _userService;
 
         public ProfileService(
-            ILoggerFactory loggerFactory
+            ILoggerFactory loggerFactory,
+            IUserService userService
         )
         {
+            _userService = userService;
             _logger = loggerFactory.CreateLogger<ProfileService>();
         }
 
@@ -36,10 +39,10 @@ namespace Resolff.APMS.IdentityServer.Customized
                 }
                 else
                 {
-                    var user = await UserServices.FindAsync(email.Value);
+                    var user = await _userService.FindByEmail(email.Value);
                     if (user != null)
                     {
-                        var claims = IdentityHelpers.GetUserClaims(user);
+                        var claims = IdentityHelpers.GetUserClaims(_userService,user);
                         context.IssuedClaims = claims.Where(x => context.RequestedClaimTypes.Contains(x.Type)).ToList();
                     }
                 }
@@ -56,7 +59,7 @@ namespace Resolff.APMS.IdentityServer.Customized
             try
             {
                 var email = context.Subject.Claims.FirstOrDefault(x => x.Type == "sub");
-                var user = await UserServices.FindAsync(email?.Value);
+                var user = await _userService.FindByEmail(email?.Value);
 
                 if (user != null)
                 {

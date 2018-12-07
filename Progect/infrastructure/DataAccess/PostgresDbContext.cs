@@ -83,15 +83,17 @@ namespace infrastructure.DataAccess
                     {
                         Id = Guid.NewGuid(),
                         Email = "admin@i.i",
-                        Password = "admin@i.i",
-                        Role = "admin"
+                        PasswordHash = "admin@i.i",
+                        Role = "admin",
+                        IsApproved = true,
                     },
                     new User()
                     {
                         Id = Guid.NewGuid(),
                         Email = "user@i.i",
-                        Password = "user@i.i",
-                        Role = "user"
+                        PasswordHash = "user@i.i",
+                        Role = "user",
+                        IsApproved = true,
                     }
                 };
 

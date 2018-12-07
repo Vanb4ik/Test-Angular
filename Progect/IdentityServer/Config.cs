@@ -35,7 +35,6 @@ namespace IdentityServer
                             {
                                 JwtClaimTypes.Role,
                                 JwtClaimTypes.Email,
-                                "countryId"
                             }
                         }
                     }

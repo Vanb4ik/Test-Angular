@@ -1,4 +1,6 @@
 ﻿using infrastructure.DataAccess;
+using infrastructure.Services;
+using infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
@@ -9,11 +11,10 @@ public static class InfrastructureExtentions
         string connectionString)
     {
         services
-            .AddMvc();
-        services
             .AddEntityFrameworkNpgsql()
             .AddDbContext<PostgresDbContext>(builder => builder.UseNpgsql(connectionString),
                 ServiceLifetime.Singleton)
+            .AddScoped<IUserService, UserService>()
             /*
             .BuildServiceProvider();*/
             ;
