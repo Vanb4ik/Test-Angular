@@ -1,4 +1,4 @@
-﻿namespace Resolff.APMS.CRM.WebAPI.Domain.Contracts
+﻿namespace WebApi.Domain.Contracts
 {
     public class Contract<T>
         where T : class

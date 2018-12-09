@@ -14,6 +14,5 @@ namespace infrastructure.DataAccess.Models
         public DateTime LasLoginDateTime { get; set; }
         public string Comment { get; set; }
         public string Role { get; set; }
-        
     }
 }

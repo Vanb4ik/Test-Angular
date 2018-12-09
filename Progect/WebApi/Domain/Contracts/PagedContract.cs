@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Resolff.APMS.CRM.WebAPI.Domain.Contracts;
+using WebApi.Controllers.Domain;
 
-namespace WebApi.Controllers.Domain.Contracts
+namespace WebApi.Domain.Contracts
 {
     public class PagedContract<T> : Contract<IList<T>>
         where T : class

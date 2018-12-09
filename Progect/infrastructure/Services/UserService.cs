@@ -31,5 +31,11 @@ namespace infrastructure.Services
 
             Context.Users.Update(user);
         }
+
+        public virtual async Task AddAsync(User user)
+        {
+            user.CreationDate = DateTime.UtcNow;
+            await base.AddAsync(user);
+        }
     }
 }

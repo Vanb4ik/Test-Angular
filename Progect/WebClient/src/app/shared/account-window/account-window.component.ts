@@ -1,6 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
+export interface IAccountWindowFormData {
+  password: string,
+  email: string
+}
+
 @Component({
   selector: 'app-account-window',
   templateUrl: './account-window.component.html',
@@ -27,22 +32,24 @@ export class AccountWindowComponent implements OnInit {
       password: fb.control('', [Validators.required, Validators.minLength(3)])
     });
   }
+
   getErrorEmailMessage() {
     return this.form.get('email').hasError('required') ? 'Ви повинні ввести значення' :
-      this.form.get('email').hasError('email') ? 'Невалідний email' :'';
+      this.form.get('email').hasError('email') ? 'Невалідний email' : '';
   }
 
-  getErrorPasswordMessage(){
-    return this.form.get('password').hasError('required')? 'Ви повинні ввести значення' :
+  getErrorPasswordMessage() {
+    return this.form.get('password').hasError('required') ? 'Ви повинні ввести значення' :
       this.form.get('password').errors['minlength']
-      && this.form.get('password').errors['minlength']['requiredLength']? 'Пароль надто короткий':""
+      && this.form.get('password').errors['minlength']['requiredLength'] ? 'Пароль надто короткий' : ""
   }
+
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    this.onClick.emit(1);
+    //console.log(this.form.value);
+    this.onClick.emit(this.form.value);
   }
 
 }

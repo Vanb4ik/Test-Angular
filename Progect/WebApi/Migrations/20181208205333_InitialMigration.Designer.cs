@@ -10,7 +10,7 @@ using infrastructure.DataAccess;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
-    [Migration("20181202123758_InitialMigration")]
+    [Migration("20181208205333_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,51 +1,57 @@
 ﻿using System.Net;
+using infrastructure.DataAccess.Models.Interface;
+using infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Resolff.APMS.CRM.WebAPI.Domain.Contracts;
-using WebApi.Controllers.Domain.Contracts;
+using WebApi.Controllers.Domain;
+using WebApi.Domain.Contracts;
 
-namespace WebApi.Controllers.Domain.Controllers
+namespace WebApi.Domain.Controllers
 {
-    public abstract class WebApiBaseController : Controller
+    public abstract class WebApiBaseController<TService, TEntity> : Controller 
+        where TService : IBaseService<TEntity>
+        where TEntity : class, IIdentifiable
     {
-        protected IActionResult OkContract<T>(T data)
-            where T : class
+        protected TService Service { get; }
+
+        protected WebApiBaseController(TService service)
         {
-            return Ok(new Contract<T>(data));
+            Service = service;
+        }
+        
+        protected IActionResult OkContract(TEntity data)
+        {
+            return Ok(new Contract<TEntity>(data));
         }
 
-        protected IActionResult NotFoundContract<T>(string errorCode)
-            where T : class
+        protected IActionResult NotFoundContract(string errorCode)
         {
-            return NotFound(new Contract<T>(errorCode));
+            return NotFound(new Contract<TEntity>(errorCode));
         }
 
-        protected IActionResult ForbidContract<T>(string errorCode)
-            where T : class
+        protected IActionResult ForbidContract(string errorCode)
         {
-            return new ObjectResult(new Contract<T>(errorCode))
+            return new ObjectResult(new Contract<TEntity>(errorCode))
             {
                 StatusCode = (int) HttpStatusCode.Forbidden
             };
         }
 
-        protected IActionResult BadRequestContract<T>(string errorCode)
-            where T : class
+        protected IActionResult BadRequestContract(string errorCode)
         {
-            return new ObjectResult(new Contract<T>(errorCode))
+            return new ObjectResult(new Contract<TEntity>(errorCode))
             {
                 StatusCode = (int) HttpStatusCode.BadRequest
             };
         }
 
-        protected IActionResult OkPagedContract<T>(PagedList<T> data)
-            where T : class
+        protected IActionResult OkPagedContract(PagedList<TEntity> data)
         {
             if (data.PagesCount < data.Page && data.PagesCount > 0)
             {
                 return NotFound();
             }
 
-            return Ok(new PagedContract<T>(data));
+            return Ok(new PagedContract<TEntity>(data));
         }
 
         protected IActionResult NotFoundPagedContract<T>(string errorCode)

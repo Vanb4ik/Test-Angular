@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using infrastructure.DataAccess.Models;
+using infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
@@ -84,15 +85,15 @@ namespace infrastructure.DataAccess
                         Id = Guid.NewGuid(),
                         Email = "admin@i.i",
                         PasswordHash = "admin@i.i",
-                        Role = "admin",
+                        Role = Enum.GetName(typeof(Role), Role.admin),
                         IsApproved = true,
                     },
                     new User()
                     {
                         Id = Guid.NewGuid(),
-                        Email = "user@i.i",
-                        PasswordHash = "user@i.i",
-                        Role = "user",
+                        Email = "owner@i.i",
+                        PasswordHash = "owner@i.i",
+                        Role = Enum.GetName(typeof(Role), Role.owner),
                         IsApproved = true,
                     }
                 };

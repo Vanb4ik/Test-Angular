@@ -1,4 +1,7 @@
-﻿using IdentityServer4.AccessTokenValidation;
+﻿using System;
+using infrastructure.Enums;
+using IdentityModel;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,9 +17,17 @@ namespace WebApi.Config
                 //.AddAuthorization()
                 .AddAuthorization(options =>
                     {
-                        options.AddPolicy("AdminsOnly", policyUser => { policyUser.RequireClaim("role", "admin"); });
-                        options.AddPolicy("AdminsManagersOnly",
-                            policyUser => { policyUser.RequireClaim("role", "manager", "admin"); });
+                        options.AddPolicy("AdminOnly",
+                            policyUser =>
+                            {
+                                policyUser.RequireClaim(JwtClaimTypes.Role, Enum.GetName(typeof(Role), Role.admin));
+                            });
+                        options.AddPolicy("AdminAndOwner",
+                            policyUser =>
+                            {
+                                policyUser.RequireClaim(JwtClaimTypes.Role, Enum.GetName(typeof(Role), Role.owner),
+                                    Enum.GetName(typeof(Role), Role.admin));
+                            });
                     }
                 )
                 .AddJsonFormatters();

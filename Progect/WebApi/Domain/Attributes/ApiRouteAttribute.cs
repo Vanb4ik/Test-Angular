@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers.Domain.Attributes
+namespace WebApi.Domain.Attributes
 {
     public class ApiRouteAttribute : RouteAttribute
     {
-        public ApiRouteAttribute(string controllerName) : base($"api/{controllerName}")
+        public ApiRouteAttribute(string controllerName) : base($"/api/{controllerName}")
         {
         }
     }

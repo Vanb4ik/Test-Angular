@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+/*using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Domain.Attributes;
-using WebApi.Controllers.Domain.Controllers;
+using WebApi.Domain.Controllers;
 
 namespace WebApi.Controllers
 {
@@ -19,4 +19,4 @@ namespace WebApi.Controllers
             return NoContent();
         }
     }
-}
+}*/

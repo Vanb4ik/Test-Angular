@@ -18,7 +18,7 @@ namespace infrastructure.DataAccess.Repository
             Context = context;
         }
 
-        public async Task AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             if (entity.Id == Guid.Empty)
             {
@@ -29,7 +29,7 @@ namespace infrastructure.DataAccess.Repository
             await Context.SaveChangesAsync();
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public virtual async Task AddRangeAsync(IEnumerable<T> entities)
         {
             var enumerable = entities.ToList();
             if (!enumerable.Any())
@@ -50,32 +50,32 @@ namespace infrastructure.DataAccess.Repository
         }
 
 
-        public async Task<T> FindAsync(Guid entityID)
+        public virtual async Task<T> FindAsync(Guid entityID)
         {
             return await Context.FindAsync<T>(new object[] {entityID});
         }
 
-        public async Task<IList<T>> GetAllAsync()
+        public virtual async Task<IList<T>> GetAllAsync()
         {
             return await Context.Set<T>().ToListAsync();
         }
 
-        public async Task RemoveAsync(T entity)
+        public virtual async Task RemoveAsync(T entity)
         {
             Context.Set<T>().Remove(entity);
         }
 
-        public async Task RemoveRangeAsync(IEnumerable<T> entities)
+        public virtual async Task RemoveRangeAsync(IEnumerable<T> entities)
         {
             Context.RemoveRange(entities);
         }
 
-        public async Task UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
             Context.Update(entity);
         }
 
-        public async Task UpdateRangeAsync(IEnumerable<T> entities)
+        public virtual async Task UpdateRangeAsync(IEnumerable<T> entities)
         {
             Context.UpdateRange(entities);
         }

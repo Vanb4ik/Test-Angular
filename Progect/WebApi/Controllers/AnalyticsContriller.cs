@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
+/*using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Domain.Attributes;
-using WebApi.Controllers.Domain.Controllers;
+using WebApi.Domain.Controllers;
 
 namespace WebApi.Controllers
 {
     [ApiRoute("analytics")]
     [Route("[controller]/[acton]")]
-    public class AnalyticsController : AuthorizeWebApiBaseController
+    public class AnalyticsController : AdminRestrictedWebApiCrudController
     {
         [HttpGet("{overview}")]
         public IActionResult Overview()
@@ -20,4 +20,4 @@ namespace WebApi.Controllers
             return OkContract(new { });
         }
     }
-}
+}*/

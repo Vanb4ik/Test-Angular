@@ -7,8 +7,10 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RootNavComponent} from './root-nav/root-nav.component';
 import {LayoutModule} from '@angular/cdk/layout';
+import { HttpClientModule} from '@angular/common/http'
 
 import {
+
   MatToolbarModule,
   MatButtonModule,
   MatSidenavModule,
@@ -63,6 +65,7 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
     AccountWindowComponent
   ],
   imports: [
+    HttpClientModule,
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,

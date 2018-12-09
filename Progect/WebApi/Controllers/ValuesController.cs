@@ -16,7 +16,7 @@ namespace WebApi.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize(Policy = "AdminsOnly")]
+        [Authorize(Policy = "AdminOnly")]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] {"value1", "value2"};
@@ -24,7 +24,7 @@ namespace WebApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [Authorize(Policy = "AdminsManagersOnly")]
+        [Authorize(Policy = "AdminAndOwner")]
         public ActionResult<string> Get(int id)
         {
             return "value";

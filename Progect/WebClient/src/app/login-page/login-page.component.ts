@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   handleOnClick(e) {
-    //alert("Handled: " + e)
+    alert("Handled: " + e)
   }
 
 }

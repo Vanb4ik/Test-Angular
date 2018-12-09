@@ -1,13 +1,18 @@
-using System;
+/*using System;
+using infrastructure.DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Domain.Attributes;
-using WebApi.Controllers.Domain.Controllers;
+using WebApi.Domain.Controllers;
 
 namespace WebApi.Controllers
 {
     [ApiRoute("category")]
-    public class Category : AuthorizeWebApiBaseController
+    public class Category : AdminRestrictedWebApiCrudController<ICategoryServi, Category>
     {
+        public Category(ICategoryRepository)
+        {
+            
+        }
         [HttpGet("")]
         public IActionResult Get()
         {
@@ -38,4 +43,4 @@ namespace WebApi.Controllers
             return NoContent();
         }
     }
-}
+}*/
