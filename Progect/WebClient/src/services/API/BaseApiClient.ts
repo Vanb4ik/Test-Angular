@@ -2,15 +2,20 @@ import {IDataByPars, UrlParser} from "./UrlParser";
 import {APIException} from "./SwaggerException";
 import {IAPIResponse} from "../../models/IAPIResponse";
 import {ConstantsUrl} from "../../Helper/ConstantsUrl";
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class BaseApiClient {
-  private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> } = <any>window;
+ // private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> } = <any>window;
   private readonly accessToken;
-  private readonly _urlParser: UrlParser;
+  /*private readonly _urlParser: UrlParser;
+  private readonly _httpClient: HttpClient;*/
 
-  constructor() {
-
-      this._urlParser = new UrlParser();
+  constructor(private _httpClient: HttpClient, private _urlParser: UrlParser) {
+    //this.httpClient = httpClient;
+    //this._urlParser = urlParser;
+    //this._urlParser = new UrlParser();
   }
 
   private _doFetch(url: string, method: string, changedData: any, headers: any = {}) {
@@ -20,7 +25,7 @@ export class BaseApiClient {
     }
 
     const url_ = url.replace(/[?&]$/, "");
-    const _url = `${ConstantsUrl.BASE_URL}/${url_}` ;
+    const _url = `${ConstantsUrl.BASE_URL}/${url_}`;
 
     let promise: Promise<any> = fetch(_url, {
       method,
@@ -34,7 +39,19 @@ export class BaseApiClient {
         return Promise.reject("An unexpected server error occurred");
       });
 
-    return promise;
+    /*let promise: Promise<any> = this._httpClient.request(method,_url,  {
+      body: changedData,
+      headers
+    })
+      .toPromise()
+      .then((_response: Response) => {
+        return this.processLoadData(_response);
+      })
+      .catch((err: any) => {
+        return Promise.reject("An unexpected server error occurred");
+      });*/
+
+    return (promise);
   }
 
   private _fetchJson(url: string, method: string, data: any = null) {
@@ -59,12 +76,6 @@ export class BaseApiClient {
     if (response.headers && response.headers.forEach) {
       response.headers.forEach((v: any, k: any) => _headers[k] = v);
     }
-    /*if(status === 401){
-        setTimeout(() => {
-            return AuthCRMService.redirectByLogin()
-        }, 2000)
-
-    }*/
     if (status === 200 || status === 206) {
       return response.json().then((json: IAPIResponse) => {
         const error = json.error;
@@ -99,20 +110,22 @@ export class BaseApiClient {
   };
 
   putJSON(dataByPars: IDataByPars, data: any) {
-
+    //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "PUT", data);
   }
 
   postJSON(dataByPars: IDataByPars, data: any) {
+    //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "POST", data);
   }
 
   deleteJSON(dataByPars: IDataByPars, data?: any) {
+    //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "DELETE", data);
   }
 
   getJSON(dataByPars: IDataByPars, data?: any) {
-
+    //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "GET", data);
   }
 }

@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RootNavComponent} from './root-nav/root-nav.component';
 import {LayoutModule} from '@angular/cdk/layout';
-import { HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http'
 
 import {
 
@@ -44,13 +44,11 @@ import {
   MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatTooltipModule, MatTreeModule
 } from '@angular/material';
 import {LoginPageComponent} from './login-page/login-page.component';
-import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
-import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
+import {SiteLayoutComponent} from './shared/layouts/site-layout/site-layout.component';
+import {AuthLayoutComponent} from './shared/layouts/auth-layout/auth-layout.component';
+import {RegisterPageComponent} from './register-page/register-page.component';
 import {AccountWindowComponent} from "./shared/account-window/account-window.component";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
-
-
 
 
 @NgModule({
@@ -125,4 +123,5 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 })
 export class AppModule {
 }
+
 //platformBrowserDynamic().bootstrapModule(AppComponent);

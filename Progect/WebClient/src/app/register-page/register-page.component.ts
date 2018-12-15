@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IAccountWindowFormData} from "../shared/account-window/account-window.component";
 import {BaseCrudModule, IStateBase} from "../../modules/BaseCrudModule";
 import {IOwner} from "../../models/IOwner";
 import {ICrudApiClient} from "../../services/API/CrudApiClient";
 import {OwnerClient} from "../../services/API/Clients/OwnerClient";
 import {HelperConst} from "../../Helper/HelperConst";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -12,11 +13,14 @@ import {HelperConst} from "../../Helper/HelperConst";
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent extends BaseCrudModule<IOwner, IStateBase> implements OnInit  {
+export class RegisterPageComponent extends BaseCrudModule<IOwner, IStateBase> implements OnInit {
 
   protected readonly _rootApiClient: ICrudApiClient<IOwner>;
 
-  constructor(ownerClient: OwnerClient) {
+  constructor(
+    ownerClient: OwnerClient,
+    private router: Router
+  ) {
     super();
     this._rootApiClient = ownerClient;
   }
@@ -24,9 +28,9 @@ export class RegisterPageComponent extends BaseCrudModule<IOwner, IStateBase> im
   ngOnInit() {
   }
 
-  async handleOnClick(e:IAccountWindowFormData) {
+  async handleOnClick(e: IAccountWindowFormData) {
     console.log(e);
-    if(!e){
+    if (!e) {
       throw Error("Invalid form data")
     }
 

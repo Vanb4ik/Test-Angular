@@ -1,8 +1,13 @@
+import {Injectable} from "@angular/core";
+
 export interface IDataByPars {
     url: string; // default ConstantsUrl.BASE_URL
     data?: object// if is /{countryId}/{id}?{page}&{limit} in url  data = {countryId:"....", id:"....", ...}
 }
 
+@Injectable({
+  providedIn:'root'
+})
 export class UrlParser {
 
     isTrue(data: object): string[] {
