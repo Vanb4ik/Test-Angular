@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         {
             if (owner == null || string.IsNullOrEmpty(owner.Email) || string.IsNullOrEmpty(owner.PasswordHash))
             {
-                return BadRequest();
+                return BadRequestContract("Invalid data owner");
             }
 
             User findUser = await Service.FindByEmail(owner.Email);

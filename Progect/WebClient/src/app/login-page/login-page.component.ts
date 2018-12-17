@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Route, Router} from "@angular/router";
+import {Messager} from "../../Helper/Messager";
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +23,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   handleOnClick(e) {
-    alert("Handled: " + e)
+    /*alert("Handled: " + e)*/
+
   }
 
 }

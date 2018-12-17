@@ -1,5 +1,4 @@
 
-import 'promise-polyfill';
 
 //let Promise = require('promise-polyfill');
 enum RoleTypes {
@@ -42,7 +41,7 @@ export interface IIdentityResponse {
     refresh_token: string
 }
 
-export class AuthCRMService {
+export class AuthService {
 
     private static refreshToken: string;
     private static startTimer: any;
@@ -50,11 +49,11 @@ export class AuthCRMService {
     private static badResponseCounter: number = 0;
 
     static isAuthenticated(): boolean {
-        return !!AuthCRMService.getStoredRawToken();
+        return !!AuthService.getStoredRawToken();
     }
 
     static isRefreshToken(): boolean {
-        return !!AuthCRMService.getStoreRefreshToken();
+        return !!AuthService.getStoreRefreshToken();
     }
 
     static getStoredRawToken(): string {
@@ -96,15 +95,15 @@ export class AuthCRMService {
     }
 
     private static checkExpiredTokenTime = () => {
-        if( AuthCRMService.startTimer){
-            clearTimeout(AuthCRMService.startTimer);
+        if( AuthService.startTimer){
+            clearTimeout(AuthService.startTimer);
         }
-        const refreshToken = AuthCRMService.getStoreRefreshToken();
+        const refreshToken = AuthService.getStoreRefreshToken();
         if (refreshToken ) {
-            AuthCRMService.refreshToken = refreshToken;
-            const delayToRefreshTokenFromServer: number = AuthCRMService.getStoreDelayToSendRefreshToken();
-            AuthCRMService.startTimer = setTimeout(() => {
-                return AuthCRMService.getNewToken()
+            AuthService.refreshToken = refreshToken;
+            const delayToRefreshTokenFromServer: number = AuthService.getStoreDelayToSendRefreshToken();
+            AuthService.startTimer = setTimeout(() => {
+                return AuthService.getNewToken()
             }, delayToRefreshTokenFromServer);
         } else {
             return
@@ -126,14 +125,14 @@ export class AuthCRMService {
         let refreshToken: string = identityResponse.refresh_token;
 
 
-        let dateExpireTimeToken: number = AuthCRMService.getDateExpireTimeToken(identityResponse.expires_in);
-        let delayToSendRefreshToken: number = AuthCRMService.getDelayToSendRefreshToken(identityResponse.expires_in);
+        let dateExpireTimeToken: number = AuthService.getDateExpireTimeToken(identityResponse.expires_in);
+        let delayToSendRefreshToken: number = AuthService.getDelayToSendRefreshToken(identityResponse.expires_in);
 
 
-        AuthCRMService.storeRawToken(token);
-        AuthCRMService.storeRefreshToken(refreshToken);
-        AuthCRMService.storeExpiryTimeToken(dateExpireTimeToken);
-        AuthCRMService.storeDelayToSendRefreshToken(delayToSendRefreshToken);
+        AuthService.storeRawToken(token);
+        AuthService.storeRefreshToken(refreshToken);
+        AuthService.storeExpiryTimeToken(dateExpireTimeToken);
+        AuthService.storeDelayToSendRefreshToken(delayToSendRefreshToken);
     }
 
     private static storeRawToken(token: string) {
@@ -153,8 +152,8 @@ export class AuthCRMService {
         sessionStorage.removeItem(StoreKeys.DELAY_TO_SEND_REFRESH_TOKEN);
         // sessionStorage.clear();
 
-        AuthCRMService.badResponseCounter = 0;
-        clearTimeout(AuthCRMService.startTimer);
+        AuthService.badResponseCounter = 0;
+        clearTimeout(AuthService.startTimer);
     }
 
 
@@ -179,26 +178,26 @@ export class AuthCRMService {
         if (!sessionStorage[StoreKeys.AUTH_API_HOST_NAME]
             || !sessionStorage[StoreKeys.RAW_REFRESH_TOKEN]) {
             // app.log.error("Not have CRM permission");
-            return AuthCRMService.redirectByLogin();
+            return AuthService.redirectByLogin();
         }
         return new Promise((resolve) => {
-            AuthCRMService.fetchToGetNewToken()
+            AuthService.fetchToGetNewToken()
                 .then(response => response.json())
-                .then((responseJSON: any) => AuthCRMService.provider(responseJSON))
+                .then((responseJSON: any) => AuthService.provider(responseJSON))
                 .then(() => {
-                    AuthCRMService.badResponseCounter = 0;
+                    AuthService.badResponseCounter = 0;
 
-                    AuthCRMService.checkExpiredTokenTime();
+                    AuthService.checkExpiredTokenTime();
                     console.log("HAVE GOT A NEW TOKEN");
                     resolve()
                 })
                 .catch(err => {
                     console.dir(err);
-                    AuthCRMService.badResponseCounter += 1;
-                    if (AuthCRMService.badResponseCounter >= 2) {
-                        AuthCRMService.badResponseCounter = 0;
+                    AuthService.badResponseCounter += 1;
+                    if (AuthService.badResponseCounter >= 2) {
+                        AuthService.badResponseCounter = 0;
                         //app.log.warning("Not have CRM permission");
-                        AuthCRMService.redirectByLogin();
+                        AuthService.redirectByLogin();
                     }
                     else {
                         setTimeout(() => {
@@ -217,7 +216,7 @@ export class AuthCRMService {
             grant_type: "refresh_token",
             client_id: "apms_client",
             client_secret: "secret",
-            refresh_token: AuthCRMService.getStoreRefreshToken()
+            refresh_token: AuthService.getStoreRefreshToken()
         };
 
         let data = "";

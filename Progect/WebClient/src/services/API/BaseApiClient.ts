@@ -4,18 +4,13 @@ import {IAPIResponse} from "../../models/IAPIResponse";
 import {ConstantsUrl} from "../../Helper/ConstantsUrl";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {Messager} from "../../Helper/Messager";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class BaseApiClient {
- // private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> } = <any>window;
   private readonly accessToken;
-  /*private readonly _urlParser: UrlParser;
-  private readonly _httpClient: HttpClient;*/
-
-  constructor(private _httpClient: HttpClient, private _urlParser: UrlParser) {
-    //this.httpClient = httpClient;
-    //this._urlParser = urlParser;
-    //this._urlParser = new UrlParser();
+  constructor(private _router : Router, private _urlParser: UrlParser) {
   }
 
   private _doFetch(url: string, method: string, changedData: any, headers: any = {}) {
@@ -84,7 +79,30 @@ export class BaseApiClient {
         }
         return json;
       });
-    } else if (
+    }
+    if (status === 400) {
+      try {
+        return response.json().then((json: IAPIResponse) => {
+          const error = json.error;
+          if (error) {
+            Messager.warning(`${error}`);
+            return Promise.reject(error)
+          }
+          return Promise.reject("An unexpected server error occurred.")
+        });
+      }
+      catch (e) {
+        return this.throwException("An unexpected server error occurred.", status, e, _headers);
+      }
+
+    }
+    if (status === 401) {
+      Messager.error("Bad authorize");
+      setTimeout(()=>{
+        this._router.navigate([ConstantsUrl.LOGIN])
+      }, 1000);
+    }
+    if (
       status !== 200
       && status !== 204
     ) {
@@ -102,7 +120,7 @@ export class BaseApiClient {
     response: string,
     headers: { [key: string]: any; },
     result?: any): any {
-    //app.log.error(`An unexpected server error occurred.\nMessage ${response}\nStatus ${status}`);
+    Messager.error(`An unexpected server error occurred.\nMessage ${response}\nStatus ${status}`);
     if (result !== null && result !== undefined)
       throw result;
     else
