@@ -49,6 +49,7 @@ import {AuthLayoutComponent} from './shared/layouts/auth-layout/auth-layout.comp
 import {RegisterPageComponent} from './register-page/register-page.component';
 import {AccountWindowComponent} from "./shared/account-window/account-window.component";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import { SpinerComponent } from './shared/spiner/spiner.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
     SiteLayoutComponent,
     AuthLayoutComponent,
     RegisterPageComponent,
-    AccountWindowComponent
+    AccountWindowComponent,
+    SpinerComponent
   ],
   imports: [
     HttpClientModule,

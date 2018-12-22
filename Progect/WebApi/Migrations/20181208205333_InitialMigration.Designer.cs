@@ -21,7 +21,7 @@ namespace WebApi.Migrations
                 .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("infrastructure.DataAccess.Models.Category", b =>
+            modelBuilder.Entity("infrastructure.TokenAccess.Models.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -38,7 +38,7 @@ namespace WebApi.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("infrastructure.DataAccess.Models.Position", b =>
+            modelBuilder.Entity("infrastructure.TokenAccess.Models.Position", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -56,7 +56,7 @@ namespace WebApi.Migrations
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("infrastructure.DataAccess.Models.User", b =>
+            modelBuilder.Entity("infrastructure.TokenAccess.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();

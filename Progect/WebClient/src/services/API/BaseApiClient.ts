@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 @Injectable()
 export class BaseApiClient {
   private readonly accessToken;
-  constructor(private _router : Router, private _urlParser: UrlParser) {
+  constructor(private _router : Router, private _urlParser: UrlParser, private _httpClient: HttpClient) {
   }
 
   private _doFetch(url: string, method: string, changedData: any, headers: any = {}) {

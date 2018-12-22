@@ -16,7 +16,7 @@ import {ConstantsUrl} from "../../Helper/ConstantsUrl";
 })
 export class RegisterPageComponent extends BaseCrudModule<IOwner, IStateBase> implements OnInit, OnDestroy {
 
-  protected readonly _rootApiClient: ICrudApiClient<IOwner>;
+  protected readonly _rootApiClient: OwnerClient;
 
   constructor(
     ownerClient: OwnerClient,
@@ -42,7 +42,7 @@ export class RegisterPageComponent extends BaseCrudModule<IOwner, IStateBase> im
     };
 
 
-    await this._rootApiClient.create(newOwner)
+    await this.create(newOwner)
       .then(() => {
         this.router.navigate([ConstantsUrl.LOGIN], {
           queryParams: {

@@ -8,6 +8,8 @@ namespace infrastructure.Services.Interfaces
     public interface IUserService: IBaseService<User>
     {
         Task<User> FindByEmail(string email);
+        Task<User> FindByPassword(string password);
         Task ChangeLastLoginDate(string email);
+        Task<object> GetAuthorize(User user);
     }
 }

@@ -1,4 +1,6 @@
+<app-spiner *ngIf="isLoading"></app-spiner>
 <app-account-window
+  *ngIf="!isLoading"
   okText="Зареєструватись"
   title="Реєстрація"
   (onClick)="handleOnClick($event)"
