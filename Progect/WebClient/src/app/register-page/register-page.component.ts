@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IAccountWindowFormData} from "../shared/account-window/account-window.component";
-import {BaseCrudModule, IStateBase} from "../../modules/BaseCrudModule";
+import {BaseCrudModule} from "../../modules/BaseCrudModule";
 import {IOwner} from "../../models/IOwner";
 import {ICrudApiClient} from "../../services/API/CrudApiClient";
 import {OwnerClient} from "../../services/API/Clients/OwnerClient";
@@ -14,7 +14,7 @@ import {ConstantsUrl} from "../../Helper/ConstantsUrl";
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent extends BaseCrudModule<IOwner, IStateBase> implements OnInit, OnDestroy {
+export class RegisterPageComponent extends BaseCrudModule<IOwner> implements OnInit, OnDestroy {
 
   protected readonly _rootApiClient: OwnerClient;
 

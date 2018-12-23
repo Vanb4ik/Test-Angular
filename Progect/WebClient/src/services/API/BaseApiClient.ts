@@ -6,10 +6,10 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Messager} from "../../Helper/Messager";
 import {Router} from "@angular/router";
+import {AuthService} from "../Authentication/Auth.service";
 
 @Injectable()
 export class BaseApiClient {
-  private readonly accessToken;
   constructor(private _router : Router, private _urlParser: UrlParser, private _httpClient: HttpClient) {
   }
 
@@ -59,8 +59,8 @@ export class BaseApiClient {
       "Accept": "application/json"
     };
 
-    if (this.accessToken) {
-      headers.Authorization = "Bearer " + this.accessToken;
+    if (AuthService.isAuthenticated()) {
+      headers.Authorization = "Bearer " + AuthService.getStoredRawToken();
     }
     return this._doFetch(url, method, data, headers);
   }

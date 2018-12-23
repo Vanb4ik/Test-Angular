@@ -4,7 +4,7 @@
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list *ngFor = "let link of links "
+    <mat-nav-list *ngFor="let link of links "
 
     >
       <a
@@ -18,7 +18,7 @@
       <a mat-list-item href="#" (click)="logout($event)">Вийти</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="content">
+  <mat-sidenav-content >
     <mat-toolbar color="primary">
       <button
         type="button"
@@ -31,9 +31,10 @@
       <span>WebClient</span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <div>
+    <div class="content">
       <router-outlet></router-outlet>
     </div>
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+

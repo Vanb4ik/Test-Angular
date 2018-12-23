@@ -1,3 +1,20 @@
-<div>
-  categories-page works!
-</div>
+<mat-card *ngIf="!isLoading">
+  <mat-card-header class="header" mat-row>
+    <div class="text">
+      <span> Категорії</span>
+    </div>
+    <div class="button">
+      <button mat-raised-button  >
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        Додати категорію
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="[link.id]" *ngFor="let link of data"> {{ link.name }} </a>
+    </mat-nav-list>
+  </mat-card-content>
+</mat-card>
+
+<app-spiner *ngIf="isLoading"></app-spiner>

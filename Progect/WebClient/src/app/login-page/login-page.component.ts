@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Route, Router} from "@angular/router";
 import {BaseApiClient} from "../../services/API/BaseApiClient";
-import {BaseCrudModule, IStateBase} from "../../modules/BaseCrudModule";
+import {BaseCrudModule} from "../../modules/BaseCrudModule";
 import {IOwner} from "../../models/IOwner";
 import {ICrudApiClient} from "../../services/API/CrudApiClient";
 import {OwnerClient} from "../../services/API/Clients/OwnerClient";
@@ -15,7 +15,7 @@ import {ConstantsUrl} from "../../Helper/ConstantsUrl";
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent extends BaseCrudModule<IOwner, IStateBase> implements OnInit {
+export class LoginPageComponent extends BaseCrudModule<IOwner> implements OnInit {
 
   protected readonly _rootApiClient: OwnerClient;
 

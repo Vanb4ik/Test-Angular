@@ -2,29 +2,14 @@ import {Injectable} from "@angular/core";
 import {IIdentifiable} from "../models/IIdentifiable";
 import {ICrudApiClient} from "../services/API/CrudApiClient";
 
-
-export interface IStateBase {
-  isLoading: boolean
-}
-
 @Injectable({
   providedIn: 'root'
 })
-export abstract class BaseCrudModule<T extends IIdentifiable, TState extends IStateBase> {
+export abstract class BaseCrudModule<T extends IIdentifiable> {
 
   protected abstract readonly _rootApiClient: ICrudApiClient<T>;
 
-  private state: IStateBase = {
-    isLoading: false,
-  };
-
-  get isLoading() {
-    return this.state.isLoading;
-  }
-
-  set isLoading(loading: boolean) {
-    this.state.isLoading = loading
-  }
+  protected isLoading: boolean = false;
 
   protected async create(item: T) {
     await this.watchAsyncProcess(
@@ -44,19 +29,13 @@ export abstract class BaseCrudModule<T extends IIdentifiable, TState extends ISt
     )
   }
 
-  protected async watchAsyncProcess(asyncActions: Promise<object>) {
+  protected async watchAsyncProcess(asyncActions: Promise<any>) {
 
     this.isLoading = true;
 
     return await asyncActions
       .then(response => {
-        if (!response || !Object.keys(response)) {
-          return;
-        }
-        this.state = {
-          ...this.state,
-          ...response,
-        }
+        return response
       })
       .catch((err: any) => {
         return Promise.reject(err);
