@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RootNavComponent} from './root-nav/root-nav.component';
+
 import {LayoutModule} from '@angular/cdk/layout';
 import {HttpClientModule} from '@angular/common/http'
 
@@ -50,19 +50,28 @@ import {RegisterPageComponent} from './register-page/register-page.component';
 import {AccountWindowComponent} from "./shared/account-window/account-window.component";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import { SpinerComponent } from './shared/spiner/spiner.component';
+import { OverviewPageComponent } from './overview-page/overview-page.component';
+import { AnalyticsPageComponent } from './analytics-page/analytics-page.component';
+import { HistoryPageComponent } from './history-page/history-page.component';
+import { OrderPageComponent } from './order-page/order-page.component';
+import { CategoriesPageComponent } from './categories-page/categories-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RootNavComponent,
     LoginPageComponent,
     AuthLayoutComponent,
     SiteLayoutComponent,
     AuthLayoutComponent,
     RegisterPageComponent,
     AccountWindowComponent,
-    SpinerComponent
+    SpinerComponent,
+    OverviewPageComponent,
+    AnalyticsPageComponent,
+    HistoryPageComponent,
+    OrderPageComponent,
+    CategoriesPageComponent
   ],
   imports: [
     HttpClientModule,

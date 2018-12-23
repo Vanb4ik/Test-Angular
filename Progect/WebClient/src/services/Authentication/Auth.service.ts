@@ -155,11 +155,8 @@ export class AuthService {
     this.clearAuthInfo();
 
     return Promise.resolve(
-      setTimeout(
-        () => {
-          window.location.replace("/"+ConstantsUrl.LOGIN)
-        }, 5000
-      ))
+      window.location.replace("/" + ConstantsUrl.LOGIN)
+    )
   }
 
   static getNewToken(): Promise<any> {

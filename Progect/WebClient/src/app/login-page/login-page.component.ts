@@ -8,6 +8,7 @@ import {OwnerClient} from "../../services/API/Clients/OwnerClient";
 import {IAccountWindowFormData} from "../shared/account-window/account-window.component";
 import {HelperConst} from "../../Helper/HelperConst";
 import {AuthService, IIdentityResponse} from "../../services/Authentication/Auth.service";
+import {ConstantsUrl} from "../../Helper/ConstantsUrl";
 
 @Component({
   selector: 'app-login-page',
@@ -57,7 +58,8 @@ export class LoginPageComponent extends BaseCrudModule<IOwner, IStateBase> imple
 
   async handleOnClick(e: IAccountWindowFormData) {
     const response: IIdentityResponse = await this.getAccessToken(e);
-    AuthService.provider(response)
+    AuthService.provider(response);
+    this.router.navigate([ConstantsUrl.OVERVIEW])
   }
 
 

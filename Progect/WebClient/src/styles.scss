@@ -19,4 +19,15 @@ a{
   }
 }
 
+.link {
+  width: auto;
+  padding: 0 5px;
+
+  &.active {
+    background-color: gray;
+  }
+  &:hover {
+    background-color: darkgray;
+  }
+}
 
