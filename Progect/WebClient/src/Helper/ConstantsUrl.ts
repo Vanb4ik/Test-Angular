@@ -7,4 +7,5 @@ export enum ConstantsUrl {
   ORDER = "order",
   ANALYTICS = "analytics",
   CATEGORIES = "categories",
+  NEW_CATEGORIES = "new_categories",
 }

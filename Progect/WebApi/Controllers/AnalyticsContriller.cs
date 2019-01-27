@@ -6,7 +6,7 @@ namespace WebApi.Controllers
 {
     [ApiRoute("analytics")]
     [Route("[controller]/[acton]")]
-    public class AnalyticsController : AdminRestrictedWebApiCrudController
+    public class AnalyticsController : WebApiCrudController
     {
         [HttpGet("{overview}")]
         public IActionResult Overview()

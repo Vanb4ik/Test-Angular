@@ -1,6 +1,9 @@
-<app-spiner *ngIf="isLoading"></app-spiner>
+<ng-template #loading>
+  <app-spiner></app-spiner>
+</ng-template>
+
 <app-account-window
-  *ngIf="!isLoading"
+  *ngIf="!isLoading; else loading"
   okText="Авторизуватись"
   title="Авторизація"
   (onClick)="handleOnClick($event)"

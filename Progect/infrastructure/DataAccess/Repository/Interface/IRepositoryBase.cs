@@ -10,7 +10,7 @@ namespace infrastructure.DataAccess.Repository.Interface
         Task AddAsync(T entity);
         Task RemoveAsync(T entity);
         Task UpdateAsync(T entity);
-        Task<T> FindAsync(Guid entityID);
+        Task<T> FindAsync(Guid entityId);
         Task RemoveRangeAsync(IEnumerable<T> entities);
         Task UpdateRangeAsync(IEnumerable<T> entities);
         Task AddRangeAsync(IEnumerable<T> entities);

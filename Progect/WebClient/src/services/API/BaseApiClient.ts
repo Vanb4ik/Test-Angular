@@ -49,23 +49,7 @@ export class BaseApiClient {
     return (promise);
   }
 
-  private _fetchJson(url: string, method: string, data: any = null) {
-    if (data) {
-      data = typeof data === "string" ? data : JSON.stringify(data);
-    }
-
-    let headers: any = {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    };
-
-    if (AuthService.isAuthenticated()) {
-      headers.Authorization = "Bearer " + AuthService.getStoredRawToken();
-    }
-    return this._doFetch(url, method, data, headers);
-  }
-
-  protected processLoadData(response: Response): Promise<IAPIResponse> {
+  protected processLoadData(response: Response): Promise<IAPIResponse<any>> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && response.headers.forEach) {
@@ -127,22 +111,66 @@ export class BaseApiClient {
       throw new APIException(message, status, response, headers, null);
   };
 
-  putJSON(dataByPars: IDataByPars, data: any) {
+  private _fetchJson(url: string, method: string, data: any = null) {
+    if (data) {
+      data = typeof data === "string" ? data : JSON.stringify(data);
+    }
+
+    let headers: any = {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    };
+
+    this.SetAuthHeader(headers);
+    return this._doFetch(url, method, data, headers);
+  }
+
+  private _fetchFormData(url: string, method: string, data: object) {
+    const requestData = new FormData();
+    const keys = Object.keys(data);
+    keys.forEach(key => {
+      requestData.append(key, data[key]);
+    });
+
+    let headers: any = {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    };
+    this.SetAuthHeader(headers);
+
+    return this._doFetch(url, method, requestData, headers);
+  }
+
+  private SetAuthHeader(headers: {Authorization: string}){
+    if (AuthService.isAuthenticated()) {
+      headers.Authorization = "Bearer " + AuthService.getStoredRawToken();
+    }
+  }
+
+  putFormData(dataByPars: IDataByPars, data: object):Promise<IAPIResponse> {
+    return this._fetchFormData(this._urlParser.getUrl(dataByPars), "PUT", data);
+  }
+
+  postFormData(dataByPars: IDataByPars, data: object):Promise<IAPIResponse> {
+    return this._fetchFormData(this._urlParser.getUrl(dataByPars), "POST", data);
+  }
+
+  putJSON(dataByPars: IDataByPars, data: object) {
     //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "PUT", data);
   }
 
-  postJSON(dataByPars: IDataByPars, data: any) {
+  postJSON(dataByPars: IDataByPars, data: object) {
     //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "POST", data);
   }
 
-  deleteJSON(dataByPars: IDataByPars, data?: any) {
+  deleteJSON(dataByPars: IDataByPars, data?: object) {
     //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "DELETE", data);
   }
 
-  getJSON(dataByPars: IDataByPars, data?: any) {
+  getJSON(dataByPars: IDataByPars, data?: object) {
     //return this._httpClient.put(this._urlParser.getUrl(dataByPars), data).toPromise();
     return this._fetchJson(this._urlParser.getUrl(dataByPars), "GET", data);
   }

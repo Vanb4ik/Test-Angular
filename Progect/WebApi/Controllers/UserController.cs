@@ -10,7 +10,7 @@ using WebApi.Domain.Controllers;
 namespace WebApi.Controllers
 {
     [ApiRoute("user")]
-    public class UserController : AdminRestrictedWebApiCrudController<IUserService, User>
+    public class UserController : AdminRestrictedWebApiBaseController<IUserService, User>
     {
         public UserController(IUserService service) : base(service)
         {

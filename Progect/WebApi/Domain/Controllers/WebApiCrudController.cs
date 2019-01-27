@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Domain.Controllers
 {
-    public abstract class AdminRestrictedWebApiCrudController<TService, TEntity>
-        : AdminRestrictedWebApiBaseController<TService, TEntity>
+    public abstract class WebApiCrudController<TService, TEntity>
+        : WebApiBaseController<TService, TEntity>
         where TService : IBaseService<TEntity>
         where TEntity : class, IIdentifiable
     {
-        protected AdminRestrictedWebApiCrudController(TService service)
+        protected WebApiCrudController(TService service)
             : base(service)
         {
         }

@@ -76,8 +76,11 @@ namespace infrastructure.DataAccess
 
         public void SeedData()
         {
+            bool saveFlag = false;
+
             if (!Users.Any())
             {
+                saveFlag = true;
                 var users = new List<User>()
                 {
                     new User()
@@ -98,7 +101,35 @@ namespace infrastructure.DataAccess
                     }
                 };
 
-                Users.AddRange(users);
+                Users.AddRangeAsync(users);
+            }
+
+            if (!Categories.Any())
+            {
+                saveFlag = true;
+                var category = new List<Category>()
+                {
+                    new Category()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "Test category 1",
+                        UserId = Users.First().Id,
+                        ImageSrc ="/upload/images/cat1.jpg"
+                    }, 
+                    new Category()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "Test category 2",
+                        UserId = Users.First().Id,
+                        ImageSrc ="/upload/images/cat2.jpeg"
+                    },
+                };
+
+                Categories.AddRangeAsync(category);
+            }
+
+            if (saveFlag)
+            {
                 SaveChanges();
             }
         }

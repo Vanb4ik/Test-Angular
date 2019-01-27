@@ -14,9 +14,11 @@ public static class InfrastructureExtentions
             .AddEntityFrameworkNpgsql()
             .AddDbContext<PostgresDbContext>(builder => builder.UseNpgsql(connectionString),
                 ServiceLifetime.Singleton)
+            
             .AddScoped<IUserService, UserService>()
-            /*
-            .BuildServiceProvider();*/
+            .AddScoped<ICategoryService, CategoryService>()
+            .AddScoped<IFileStoreService, FileStoreService>()
+            
             ;
         return services;
     }

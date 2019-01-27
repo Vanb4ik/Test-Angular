@@ -22,4 +22,31 @@ export class CategoryClient extends CrudApiClient<ICategory> {
     return this.getJSON(data_)
   }
 
+  getCategoryById(catId: string): Promise<IAPIResponse>{
+    //debugger
+    const data_ = {
+      url: "category/{catId}",
+      data:{
+        catId,
+      }
+    };
+
+    return this.getJSON(data_)
+  }
+
+  create(category: ICategory, image?: File): Promise<IAPIResponse> {
+    const data_ = {
+      url: "category"
+    };
+
+    return this.putFormData(data_, {category,  image})
+  }
+
+  update(category: ICategory, image?: File): Promise<IAPIResponse> {
+    const data_ = {
+      url: "category"
+    };
+
+    return this.putFormData(data_, {category,  image})
+  };
 }

@@ -1,0 +1,102 @@
+
+<mat-grid-list cols="4" rowHeight="50">
+  <mat-grid-tile
+    style="overflow: auto"
+    [colspan]="3"
+    [rowspan]="1"
+    [style.background]="'lightblue'">
+    <div style="width: 100%; text-align: start">
+      <a routerLink={{CategoriesUrl}}>Category</a>
+      <span>/</span>
+      <span>{{isNewCategory? "Create":"Update"}}</span>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    style="overflow: auto"
+    [colspan]="1"
+    [rowspan]="1"
+    [style.background]="'lightgreen'">
+    <div>
+      <div style="width: 100%; text-align: end; display: block">
+        categories-form works!
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="4" style="margin-top: 5px">
+  <mat-grid-tile
+    style="overflow: auto"
+    [colspan]="3"
+    [rowspan]="1"
+    [style.border]="'1px solid #fff'">
+    <div >
+      <form [formGroup]="form">
+        <mat-form-field >
+          <input matInput
+                 required
+                 id="name"
+                 formControlName="name"
+                 value=""
+                 placeholder="Categories..." >
+          <mat-error *ngIf="form.get('name').invalid">{{getNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <button mat-button type="button"
+                (click)="generateClickOpenFile()"
+                [disabled]="form.disabled"
+        >
+          <mat-icon>get_app</mat-icon>
+          Upload image
+        </button>
+      </form>
+
+    </div>
+    <div style="display: block;">
+      <button mat-button type="button"
+              (click)="onSubmit()"
+              [disabled]="form.invalid || form.disabled"
+      >
+        <mat-icon>done</mat-icon>
+        Save
+      </button>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    style="overflow: auto"
+    [colspan]="1"
+    [rowspan]="1"
+    [style.border]="'1px solid #fff'">
+    <div>
+
+      <div style="width: 100%; text-align: end; display: block">
+        <input type="file"
+               style="display: none"
+               #input
+               (change)="onFileSelect($event)"
+        >
+        <img [src]="imagePreview"
+             *ngIf = "imagePreview"
+             alt="prev"
+             style="width: 100%; max-height: 100%">
+      </div>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    style="overflow: auto"
+    [colspan]="4"
+    [style.background]="'lightgreen'">
+    <div>
+      <p>
+        <app-positions-form></app-positions-form>
+      </p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
+
+

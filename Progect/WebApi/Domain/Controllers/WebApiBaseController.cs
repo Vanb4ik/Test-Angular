@@ -18,9 +18,9 @@ namespace WebApi.Domain.Controllers
             Service = service;
         }
         
-        protected IActionResult OkContract(TEntity data)
+        protected IActionResult OkContract<T>(T data) where T : class
         {
-            return Ok(new Contract<TEntity>(data));
+            return Ok(new Contract<T>(data));
         }
 
         protected IActionResult NotFoundContract(string errorCode)

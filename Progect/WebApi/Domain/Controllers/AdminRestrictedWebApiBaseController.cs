@@ -6,7 +6,7 @@ namespace WebApi.Domain.Controllers
 {
     [Authorize(Roles = "admin")]
     public abstract class
-        AdminRestrictedWebApiBaseController<TService, TEntity> : WebApiBaseController<TService, TEntity>
+        AdminRestrictedWebApiBaseController<TService, TEntity> : WebApiCrudController<TService, TEntity>
         where TService : IBaseService<TEntity>
         where TEntity : class, IIdentifiable
     {

@@ -1,46 +1,54 @@
-/*using System;
-using infrastructure.TokenAccess.Repository.Interface;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using infrastructure.DataAccess.Models;
+using infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Domain.Attributes;
+using Newtonsoft.Json;
+using WebApi.Domain.Attributes;
 using WebApi.Domain.Controllers;
 
 namespace WebApi.Controllers
 {
     [ApiRoute("category")]
-    public class Category : AdminRestrictedWebApiCrudController<ICategoryServi, Category>
+    
+    public class CategoryController : AuthorizeWebApiBaseController<ICategoryService, Category>
     {
-        public Category(ICategoryRepository)
+        public CategoryController(ICategoryService categoryService)
+            : base(categoryService)
         {
+        }
+
+        [HttpGet("getAll")]
+        public async Task<IActionResult> Get()
+        {
+            IList<Category> result = await Service.GetAllAsync();
             
+            return OkContract(result);
         }
-        [HttpGet("")]
-        public IActionResult Get()
+        
+        [HttpPost]
+        public async Task<IActionResult> Post(IFormFile image, string rawCategory)
         {
-            return OkContract(new { });
-        }
+            Category category = JsonConvert.DeserializeObject<Category>(rawCategory);
+            if (category == null)
+            {
+                return BadRequestContract("");
+            }
 
-        [HttpGet("{categoryId}")]
-        public IActionResult Get(Guid categoryId)
-        {
-            return OkContract(new {categoryId});
-        }
-
-        [HttpDelete("{categoryId}")]
-        public IActionResult Delete(string categoryId)
-        {
-            return NoContent();
-        }
-
-        [HttpPost("")]
-        public IActionResult Post(Category category)
-        {
-            return NoContent();
-        }
-
-        [HttpPut("{categoryId}")]
-        public IActionResult Put(Category category)
-        {
-            return NoContent();
+            if (category.Id != Guid.Empty)
+            {
+                var findCategoryInRepo = await Service.FindAsync(category.Id);
+                if (findCategoryInRepo == null)
+                {
+                    return BadRequestContract("");
+                }
+            }
+            
+            Category result = await Service.SaveCategoryAsync(category, image?.OpenReadStream());
+            
+            return OkContract(result);
         }
     }
-}*/
+}

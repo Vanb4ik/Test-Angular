@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace WebApi.Domain.Controllers
 {
     [Authorize]
-    public class AuthorizeWebApiBaseController<TService, TEntity> : WebApiBaseController<TService, TEntity>
+    public class AuthorizeWebApiBaseController<TService, TEntity> : WebApiCrudController<TService, TEntity>
         where TService : IBaseService<TEntity>
         where TEntity : class, IIdentifiable
     {

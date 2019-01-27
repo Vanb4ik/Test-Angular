@@ -5,6 +5,8 @@ import {IOwner} from "../../models/IOwner";
 import {ICategory} from "../../models/ICategory";
 import {CategoryClient} from "../../services/API/Clients/CategoryClient";
 import {IAPIResponse} from "../../models/IAPIResponse";
+import {Router} from "@angular/router";
+import {ConstantsUrl} from "../../Helper/ConstantsUrl";
 
 @Component({
   selector: 'app-categories-page',
@@ -14,8 +16,7 @@ import {IAPIResponse} from "../../models/IAPIResponse";
 export class CategoriesPageComponent extends BaseCrudModule<ICategory> implements OnInit {
   protected readonly _rootApiClient: CategoryClient;
 
-
-  constructor(readonly categoryClient: CategoryClient) {
+  constructor(readonly categoryClient: CategoryClient, readonly router: Router) {
     super();
     this._rootApiClient = this.categoryClient;
   }
@@ -40,5 +41,8 @@ export class CategoriesPageComponent extends BaseCrudModule<ICategory> implement
 
   }
 
+  pushToNewCategoriesForm(){
+    this.router.navigate([`/${ConstantsUrl.CATEGORIES}/${ConstantsUrl.NEW_CATEGORIES}`])
+  }
 
 }

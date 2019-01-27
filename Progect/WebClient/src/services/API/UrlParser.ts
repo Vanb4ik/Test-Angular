@@ -53,6 +53,7 @@ export class UrlParser {
 
     getUrl(dataByPars: IDataByPars): string {
 
+        //debugger
         if (!dataByPars) {
             throw new Error("Undefined dat by pars")
         }
@@ -68,6 +69,7 @@ export class UrlParser {
         if (!data) {
             return (url);
         }
+
 
         let url_ = url.replace(" ", "");
         url_ = url.replace("    ", "");
