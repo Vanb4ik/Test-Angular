@@ -126,6 +126,7 @@ export class BaseApiClient {
   }
 
   private _fetchFormData(url: string, method: string, data: object) {
+
     const requestData = new FormData();
     const keys = Object.keys(data);
     keys.forEach(key => {
@@ -133,8 +134,6 @@ export class BaseApiClient {
     });
 
     let headers: any = {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
     };
     this.SetAuthHeader(headers);
 

@@ -40,8 +40,8 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
   getEmptyCategory(): ICategory{
     return {
       id: HelperConst.EMPTY_ID,
+      userId: HelperConst.EMPTY_ID,
       name: "",
-      userId: "",
       imageSrc: "",
     }
   }
@@ -49,7 +49,10 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
     if(category){
       this.categoryToSave = {...category};
     }
-    this.categoryToSave = this.getEmptyCategory()
+    else{
+      this.categoryToSave = this.getEmptyCategory()
+    }
+
   }
 
   generateClickOpenFile(){

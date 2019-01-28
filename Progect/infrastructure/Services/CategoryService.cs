@@ -11,7 +11,7 @@ namespace infrastructure.Services
 {
     public class CategoryService : BaseService<Category>, ICategoryService
     {
-        private IFileStoreService _fileStoreService;
+        private readonly IFileStoreService _fileStoreService;
         public CategoryService(PostgresDbContext context, IFileStoreService fileStoreService)
             : base(context)
         {
@@ -34,7 +34,6 @@ namespace infrastructure.Services
 
             await UpdateAsync(category);
 
-                
             return category;
         }
 
@@ -44,7 +43,11 @@ namespace infrastructure.Services
             var imageToParentFullPassDirectory = Path.Combine(imageDir.AbsolutePas, category.Id.ToString());
             var imageToParentRelativePassDirectory = Path.Combine(imageDir.RelativePas, category.Id.ToString());
             var imageFileName = $"{Guid.NewGuid()}_.jpg";
-            
+
+            if (!Directory.Exists(imageToParentFullPassDirectory))
+            {
+                Directory.CreateDirectory(imageToParentFullPassDirectory);
+            }
             var imageFullPassFileName = Path.Combine(imageToParentFullPassDirectory,imageFileName);
             var imageRelativePassFileName = Path.Combine(imageToParentRelativePassDirectory,imageFileName);
 

@@ -28,7 +28,7 @@ namespace WebApi.Controllers
             return OkContract(result);
         }
         
-        [HttpPost]
+        [HttpPost("upload")]
         public async Task<IActionResult> Post(IFormFile image, string rawCategory)
         {
             Category category = JsonConvert.DeserializeObject<Category>(rawCategory);

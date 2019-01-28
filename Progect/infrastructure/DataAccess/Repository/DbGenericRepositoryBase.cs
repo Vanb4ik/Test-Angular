@@ -53,6 +53,7 @@ namespace infrastructure.DataAccess.Repository
         public virtual async Task<T> FindAsync(Guid entityID)
         {
             return await Context.FindAsync<T>(new object[] {entityID});
+           
         }
 
         public virtual async Task<IList<T>> GetAllAsync()
@@ -63,6 +64,7 @@ namespace infrastructure.DataAccess.Repository
         public virtual async Task RemoveAsync(T entity)
         {
             Context.Set<T>().Remove(entity);
+            await Context.SaveChangesAsync();
         }
 
         public virtual async Task RemoveRangeAsync(IEnumerable<T> entities)
@@ -73,11 +75,13 @@ namespace infrastructure.DataAccess.Repository
         public virtual async Task UpdateAsync(T entity)
         {
             Context.Update(entity);
+            await Context.SaveChangesAsync();
         }
 
         public virtual async Task UpdateRangeAsync(IEnumerable<T> entities)
         {
             Context.UpdateRange(entities);
+            await Context.SaveChangesAsync();
         }
     }
 }

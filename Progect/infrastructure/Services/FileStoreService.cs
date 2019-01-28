@@ -41,9 +41,9 @@ namespace infrastructure.Services
 
         public ImageDirInfo GetImageDir()
         {
-            string emptyPas = "";
-            string fullPas = Path.Combine(_env.WebRootPath, _fileStoreConfig.RootDir, _fileStoreConfig.ImageDir);
-            return new ImageDirInfo(emptyPas, fullPas);
+            string relativePas = Path.Combine( _fileStoreConfig.RootDir, _fileStoreConfig.ImageDir);;
+            string absolutePas = Path.Combine(_env.WebRootPath,relativePas);
+            return new ImageDirInfo(relativePas, absolutePas);
 
         }
     }
