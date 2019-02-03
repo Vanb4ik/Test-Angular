@@ -7,6 +7,7 @@ import {ICategory} from "../../../models/ICategory";
 import {CategoryClient} from "../../../services/API/Clients/CategoryClient";
 import {IAPIResponse} from "../../../models/IAPIResponse";
 import {HelperConst} from "../../../Helper/HelperConst";
+import { Messager } from 'src/Helper/Messager';
 
 @Component({
   selector: 'app-categories-form',
@@ -86,6 +87,11 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
     const category = {...categoryToSave, ...form.value};
 
     this._rootApiClient.create(category, image)
+      .then((response: IAPIResponse) => {
+        if (!response.error) {
+          Messager.success(`done`);
+        }
+      })
   }
 
   ngOnInit() {

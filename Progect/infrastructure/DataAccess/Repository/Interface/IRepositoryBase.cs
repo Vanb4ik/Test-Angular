@@ -7,7 +7,7 @@ namespace infrastructure.DataAccess.Repository.Interface
 {
     public interface IRepositoryBase<T> where T : class, IIdentifiable
     {
-        Task AddAsync(T entity);
+        Task<T> AddAsync(T entity);
         Task RemoveAsync(T entity);
         Task UpdateAsync(T entity);
         Task<T> FindAsync(Guid entityId);

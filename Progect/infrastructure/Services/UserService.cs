@@ -44,12 +44,15 @@ namespace infrastructure.Services
             }
 
             Context.Users.Update(user);
+            Context.SaveChanges();
         }
 
-        public virtual async Task AddAsync(User user)
+        public override async Task<User> AddAsync(User user)
         {
             user.CreationDate = DateTime.UtcNow;
-            await base.AddAsync(user);
+            var savedUser =  await base.AddAsync(user);
+            Context.SaveChanges();
+            return savedUser;
         }
 
         public async Task<object> GetAuthorize(User user)

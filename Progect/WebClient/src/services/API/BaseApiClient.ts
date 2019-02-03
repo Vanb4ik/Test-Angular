@@ -33,19 +33,7 @@ export class BaseApiClient {
       .catch((err: any) => {
         return Promise.reject("An unexpected server error occurred");
       });
-
-    /*let promise: Promise<any> = this._httpClient.request(method,_url,  {
-      body: changedData,
-      headers
-    })
-      .toPromise()
-      .then((_response: Response) => {
-        return this.processLoadData(_response);
-      })
-      .catch((err: any) => {
-        return Promise.reject("An unexpected server error occurred");
-      });*/
-
+    
     return (promise);
   }
 
@@ -60,6 +48,9 @@ export class BaseApiClient {
         const error = json.error;
         if (error) {
           return this.throwException("An unexpected server error occurred.", status, error, _headers);
+        }
+        else {
+          
         }
         return json;
       });

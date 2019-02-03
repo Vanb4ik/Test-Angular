@@ -1,4 +1,5 @@
 using infrastructure.DataAccess;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,18 @@ namespace WebApi.Config
                 .CreateScope())
             {
                 var dbcontext = serviceScope.ServiceProvider.GetService<PostgresDbContext>();
+
+                try
+                {
+                    dbcontext.Users.Any();
+                }
+                catch (System.Exception)
+                {
+
+                    dbcontext.Database.EnsureCreated();
+                //    dbcontext.Database.GetMigrations();
+                }
+
                 dbcontext.Database.Migrate();
                 dbcontext.SeedData();
             }

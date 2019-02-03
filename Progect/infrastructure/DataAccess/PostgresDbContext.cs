@@ -104,7 +104,7 @@ namespace infrastructure.DataAccess
                 Users.AddRangeAsync(users);
             }
 
-            if (!Categories.Any())
+            if (!Categories.Any() && Users.Any())
             {
                 saveFlag = true;
                 var category = new List<Category>()
@@ -114,14 +114,14 @@ namespace infrastructure.DataAccess
                         Id = Guid.NewGuid(),
                         Name = "Test category 1",
                         UserId = Users.First().Id,
-                        ImageSrc ="/upload/images/cat1.jpg"
+                        ImageSrc ="/upload/images/cat1.jpeg"
                     }, 
                     new Category()
                     {
                         Id = Guid.NewGuid(),
                         Name = "Test category 2",
                         UserId = Users.First().Id,
-                        ImageSrc ="/upload/images/cat2.jpeg"
+                        ImageSrc ="/upload/images/cat2.jpg"
                     },
                 };
 

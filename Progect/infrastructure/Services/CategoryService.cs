@@ -20,20 +20,22 @@ namespace infrastructure.Services
 
         public async Task<Category> SaveCategoryAsync(Category category, Stream stream = null)
         {
+            if (category.Id == Guid.Empty)
+            {
+                var savedCategory = await AddAsync(category);
+                category.Id = savedCategory.Id;
+            }
+            else
+            {
+                await UpdateAsync(category);
+            }
+
             if (stream != null)
             {
                 category.ImageSrc = await SaveImageToFSAsync(category, stream);
             }
 
-            if (category.Id == Guid.Empty)
-            {
-                await AddAsync(category);
-                
-                return category;
-            }
-
-            await UpdateAsync(category);
-
+            Context.SaveChanges();
             return category;
         }
 
@@ -48,8 +50,8 @@ namespace infrastructure.Services
             {
                 Directory.CreateDirectory(imageToParentFullPassDirectory);
             }
-            var imageFullPassFileName = Path.Combine(imageToParentFullPassDirectory,imageFileName);
-            var imageRelativePassFileName = Path.Combine(imageToParentRelativePassDirectory,imageFileName);
+            var imageFullPassFileName = Path.Combine(imageToParentFullPassDirectory, imageFileName);
+            var imageRelativePassFileName = Path.Combine(imageToParentRelativePassDirectory, imageFileName);
 
             using (var imageStream = new FileStream(imageFullPassFileName, FileMode.Create))
             {
@@ -58,6 +60,6 @@ namespace infrastructure.Services
 
             return imageRelativePassFileName;
         }
-        
+
     }
 }

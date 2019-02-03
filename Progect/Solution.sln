@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{3C8DFE47-CD5C-4AFB-9BB6-42598CBA7FCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{1E35B07B-A3AB-49E4-8C8E-A202240B264E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{1E35B07B-A3AB-49E4-8C8E-A202240B264E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "infrastructure", "infrastructure\infrastructure.csproj", "{F23F0C73-98AB-4951-8644-F1E57889724F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "infrastructure\Infrastructure.csproj", "{F23F0C73-98AB-4951-8644-F1E57889724F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{CBC79868-7016-4542-9870-F59420D1FF56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebClient.csproj", "{CBC79868-7016-4542-9870-F59420D1FF56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +33,11 @@ Global
 		{CBC79868-7016-4542-9870-F59420D1FF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBC79868-7016-4542-9870-F59420D1FF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBC79868-7016-4542-9870-F59420D1FF56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B87CF87-FE8E-45D9-8BD2-056A61278429}
 	EndGlobalSection
 EndGlobal
