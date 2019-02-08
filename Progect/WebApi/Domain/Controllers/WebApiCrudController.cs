@@ -27,14 +27,14 @@ namespace WebApi.Domain.Controllers
         [HttpPost("")]
         public virtual async Task<IActionResult> Post([FromBody] TEntity entity)
         {
-            await Service.AddAsync(entity);
+            await Service.AddAsync(entity, commit:true);
             return OkContract(entity);
         }
 
         [HttpPut("")]
         public virtual async Task<IActionResult> Put([FromBody] TEntity entity)
         {
-            await Service.UpdateAsync(entity);
+            await Service.UpdateAsync(entity, commit: true);
             return OkContract(entity);
         }
 
@@ -47,7 +47,7 @@ namespace WebApi.Domain.Controllers
                 return NotFound();
             }
 
-            await Service.RemoveAsync(findItem);
+            await Service.RemoveAsync(findItem, commit: true);
             return NoContent();
         }
     }

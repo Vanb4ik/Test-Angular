@@ -1,0 +1,23 @@
+.mat-card-header-text {
+  margin: 0;
+}
+
+.header, .text, .button {
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  &.text {
+    box-sizing: content-box;
+    width: 50%;
+    justify-content: start;
+    min-width: 100px;
+  }
+
+  &.button {
+    box-sizing: content-box;
+    width: 50%;
+    justify-content: flex-end;
+    min-width: 100px;
+  }
+}

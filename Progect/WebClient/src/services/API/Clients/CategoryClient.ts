@@ -9,10 +9,14 @@ import {IAPIResponse} from "../../../models/IAPIResponse";
 })
 export class CategoryClient extends CrudApiClient<ICategory> {
 
-  readonly deleteDataInfo: IDataByPars;
+  readonly deleteDataInfo: IDataByPars = {
+    url: "category/{categoryId}",
+    data: {},
+  };
+
   readonly updateDataInfo: IDataByPars;
   readonly createDataInfo: IDataByPars;
-
+  
   getAllCategory(): Promise<IAPIResponse> {
     const data_ = {
       url: "category/getAll",
@@ -37,17 +41,13 @@ export class CategoryClient extends CrudApiClient<ICategory> {
     const data_ = {
       url: "category/upload"
     };
-
     const data:any = {rawCategory: JSON.stringify(category), image};
     
     return this.postFormData(data_, data)
   }
 
-  update(category: ICategory, image?: File): Promise<IAPIResponse> {
-    const data_ = {
-      url: "category/upload"
-    };
-
-    return this.postFormData(data_, {category,  image})
-  };
+  delete(category: ICategory) {
+    this.deleteDataInfo.data["categoryId"] = category.id;
+    return super.delete(category)
+  }
 }

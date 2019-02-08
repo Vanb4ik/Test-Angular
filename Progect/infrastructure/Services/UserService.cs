@@ -47,11 +47,12 @@ namespace infrastructure.Services
             Context.SaveChanges();
         }
 
-        public override async Task<User> AddAsync(User user)
+        public override async Task<User> AddAsync(User user, bool commit=false)
         {
             user.CreationDate = DateTime.UtcNow;
             var savedUser =  await base.AddAsync(user);
             Context.SaveChanges();
+
             return savedUser;
         }
 

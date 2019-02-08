@@ -1,13 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ConstantsUrl} from "../../../Helper/ConstantsUrl";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {BaseCrudModule} from "../../../modules/BaseCrudModule";
-import {ICategory} from "../../../models/ICategory";
-import {CategoryClient} from "../../../services/API/Clients/CategoryClient";
-import {IAPIResponse} from "../../../models/IAPIResponse";
-import {HelperConst} from "../../../Helper/HelperConst";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ConstantsUrl } from "../../../Helper/ConstantsUrl";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { BaseCrudModule } from "../../../modules/BaseCrudModule";
+import { ICategory } from "../../../models/ICategory";
+import { CategoryClient } from "../../../services/API/Clients/CategoryClient";
+import { IAPIResponse } from "../../../models/IAPIResponse";
+import { HelperConst } from "../../../Helper/HelperConst";
 import { Messager } from 'src/Helper/Messager';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-categories-form',
@@ -28,7 +29,8 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
   constructor(
     private categoryClient: CategoryClient,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private router: Router,
+    private fb: FormBuilder,
   ) {
     super();
     this._rootApiClient = categoryClient;
@@ -38,7 +40,7 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
     });
   }
 
-  getEmptyCategory(): ICategory{
+  getEmptyCategory(): ICategory {
     return {
       id: HelperConst.EMPTY_ID,
       userId: HelperConst.EMPTY_ID,
@@ -46,21 +48,21 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
       imageSrc: "",
     }
   }
-  setCategoryToSave(category?: ICategory){
-    if(category){
-      this.categoryToSave = {...category};
+
+  setCategoryToSave(category?: ICategory) {
+    if (category) {
+      this.categoryToSave = { ...category };
     }
-    else{
+    else {
       this.categoryToSave = this.getEmptyCategory()
     }
-
   }
 
-  generateClickOpenFile(){
+  generateClickOpenFile() {
     this.inputRef.nativeElement.click();
   }
 
-  onFileSelect(event: any){
+  onFileSelect(event: any) {
     const file = event.target.files[0];
     this.image = file;
 
@@ -80,18 +82,25 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
   }
 
   async onSubmit() {
-    const {categoryToSave,form,image} = this;
+    const { categoryToSave, form, image } = this;
+    
+    const category = { ...categoryToSave, ...form.value };
 
-    console.dir("save!!!");
-    console.dir(this.form.value);
-    const category = {...categoryToSave, ...form.value};
-
-    this._rootApiClient.create(category, image)
-      .then((response: IAPIResponse) => {
-        if (!response.error) {
-          Messager.success(`done`);
+    this.createCategory(category, image)
+      .then((response: IAPIResponse<ICategory>) => {
+        if (response.error) {
+          return;
         }
+        const savedCategory = response.payload;
+        Messager.success(`done`);
+        this.router.navigate([this.CategoriesUrl + `/${savedCategory.id}`])
       })
+  }
+
+  protected async createCategory(category: ICategory, image?: File): Promise<IAPIResponse> {
+    return this.watchAsyncProcess(
+      this._rootApiClient.create(category, image)
+    )
   }
 
   ngOnInit() {
@@ -104,13 +113,22 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
     })
   }
 
+  deleteCategory() {
+    this.delete(this.categoryToSave)
+     
+      .then(() => {
+        this.router.navigate([this.CategoriesUrl])
+      })
+  }
+
+
   async initData(catId: string) {
     try {
       this.form.disable();
-      const response: IAPIResponse<ICategory> = await this._rootApiClient.getCategoryById(catId);
-      const {payload:{name, imageSrc}} = response;
+      const response: IAPIResponse<ICategory> = await this.getCategory(catId);
+      const { payload: { name, imageSrc } } = response;
       if (name) {
-        this.form.patchValue({name});
+        this.form.patchValue({ name });
         this.imagePreview = imageSrc;
 
         const category: ICategory = response.payload;
@@ -125,4 +143,9 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
     }
   }
 
+  protected getCategory(catId: string) {
+    return this.watchAsyncProcess(
+      this._rootApiClient.getCategoryById(catId)
+    )
+  }
 }

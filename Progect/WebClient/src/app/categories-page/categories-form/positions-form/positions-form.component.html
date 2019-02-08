@@ -1,3 +1,36 @@
-<p>
-  positions-form works!
-</p>
+<mat-card *ngIf="!isLoading; else loader">
+  <mat-card-header class="header" mat-row>
+    <div class="text">
+      <span>Позиції</span>
+    </div>
+    <div class="button">
+      <button mat-raised-button (click)="pushToNewCategoriesForm()">
+        <mat-icon aria-label="">add</mat-icon>
+        Додати позицію
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-nav-list *ngIf="data.length >0 ; else empty">
+      <p>-немає позицій-</p>
+      <a mat-list-item *ngFor="let position of data">
+        <span>
+          {{ position.name }}
+          <strong>
+            {{position.cost}}:$
+          </strong>
+        </span>
+        <span>
+          <mat-icon aria-label="">add</mat-icon>
+        </span>
+      </a>
+    </mat-nav-list>
+    
+  </mat-card-content>
+</mat-card>
+<ng-template #loader>
+  <app-spiner></app-spiner>
+</ng-template>
+<ng-template #empty>
+  <p style="text-align:center;">-немає позицій-</p>
+</ng-template>
