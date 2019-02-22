@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseCrudModule} from "../../modules/BaseCrudModule";
-import {ICrudApiClient} from "../../services/API/CrudApiClient";
-import {IOwner} from "../../models/IOwner";
 import {ICategory} from "../../models/ICategory";
 import {CategoryClient} from "../../services/API/Clients/CategoryClient";
 import {IAPIResponse} from "../../models/IAPIResponse";

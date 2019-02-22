@@ -1,11 +1,10 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using infrastructure.Config;
 using infrastructure.DataAccess;
 using infrastructure.DataAccess.Models;
 using infrastructure.Services.Interfaces;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
 
 namespace infrastructure.Services
 {
@@ -18,7 +17,7 @@ namespace infrastructure.Services
             _fileStoreService = fileStoreService;
         }
 
-        public async Task<Category> SaveCategoryAsync(Category category, Stream stream = null)
+        public async Task<Category> SaveCategoryAsync(Category category, IFormFile image = null)
         {
             if (category.Id == Guid.Empty)
             {
@@ -29,22 +28,23 @@ namespace infrastructure.Services
             {
                 await UpdateAsync(category);
             }
-
-            if (stream != null)
+            if (image != null)
             {
-                category.ImageSrc = await SaveImageToFSAsync(category, stream);
+                category.ImageSrc = await SaveImageToFSAsync(category, image);
             }
 
             Context.SaveChanges();
             return category;
         }
 
-        private async Task<string> SaveImageToFSAsync(Category category, Stream stream)
+        private async Task<string> SaveImageToFSAsync(Category category, IFormFile image)
         {
+            var stream = image.OpenReadStream();
             var imageDir = _fileStoreService.GetImageDir();
             var imageToParentFullPassDirectory = Path.Combine(imageDir.AbsolutePas, category.Id.ToString());
             var imageToParentRelativePassDirectory = Path.Combine(imageDir.RelativePas, category.Id.ToString());
-            var imageFileName = $"{Guid.NewGuid()}_.jpg";
+            var ext = Path.GetExtension(image.FileName);
+            var imageFileName = $"{Guid.NewGuid()}_{ext}";
 
             if (!Directory.Exists(imageToParentFullPassDirectory))
             {

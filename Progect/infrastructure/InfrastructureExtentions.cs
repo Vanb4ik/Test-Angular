@@ -1,9 +1,9 @@
 ﻿using infrastructure.DataAccess;
 using infrastructure.Services;
 using infrastructure.Services.Interfaces;
+using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
 
 public static class InfrastructureExtentions
 {
@@ -15,6 +15,7 @@ public static class InfrastructureExtentions
             .AddDbContext<PostgresDbContext>(builder => builder.UseNpgsql(connectionString),
                 ServiceLifetime.Scoped)
             
+            .AddScoped<IPositionService, PositionService>()
             .AddScoped<IUserService, UserService>()
             .AddScoped<ICategoryService, CategoryService>()
             .AddScoped<IFileStoreService, FileStoreService>()

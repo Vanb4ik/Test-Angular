@@ -12,6 +12,7 @@
 **/packages/
 **/bower_components/
 **/babel_cache/
+**/wwwroot/
 DevOps/
 
 
@@ -26,3 +27,6 @@ dist/
 .DS_Store
 .DS_Store?
 __MACOSX/
+
+# Progect
+

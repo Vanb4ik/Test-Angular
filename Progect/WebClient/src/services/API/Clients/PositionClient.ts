@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
 import {CrudApiClient} from "../CrudApiClient";
 import {IDataByPars} from "../UrlParser";
-import {ICategory} from "../../../models/ICategory";
-import {IAPIResponse} from "../../../models/IAPIResponse";
 import { IPosition } from 'src/models/IPosition';
 
 @Injectable({
@@ -14,12 +12,19 @@ export class PositionClient extends CrudApiClient<IPosition> {
     url: "position/{positionId}",
     data: {},
   };
-  readonly updateDataInfo: IDataByPars;
-  readonly createDataInfo: IDataByPars;
+
+  readonly updateDataInfo: IDataByPars = {
+    url: "position/{positionId}",
+    data: {},
+  };
+
+  readonly createDataInfo: IDataByPars = {
+    url: "position",
+  };
 
   getAllByCategoryId(categoryId: string) {
     const data_ = {
-      url: "positions/getAll/{categoryId}",
+      url: "position/GetAll/{categoryId}",
       data: {
         categoryId,
       }
@@ -28,9 +33,15 @@ export class PositionClient extends CrudApiClient<IPosition> {
     return this.getJSON(data_)
   }
 
-  delete(category: IPosition) {
-    this.deleteDataInfo.data["positionId"] = category.id;
+  update(position: IPosition) {
+    this.updateDataInfo.data["positionId"] = position.id;
 
-    return super.delete(category)
+    return super.update(position);
+  }
+
+  delete(position: IPosition) {
+    this.deleteDataInfo.data["positionId"] = position.id;
+
+    return super.delete(position)
   }
 }

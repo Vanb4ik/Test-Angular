@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using infrastructure.DataAccess.Models.Interface;
 using infrastructure.Services.Interfaces;
@@ -31,9 +32,14 @@ namespace WebApi.Domain.Controllers
             return OkContract(entity);
         }
 
-        [HttpPut("")]
-        public virtual async Task<IActionResult> Put([FromBody] TEntity entity)
+        [HttpPut("{tId}")]
+        public virtual async Task<IActionResult> Put(Guid tId, [FromBody] TEntity entity)
         {
+            if (tId == Guid.Empty || entity.Id != tId)
+            {
+                return NotFoundContract("");
+            }
+
             await Service.UpdateAsync(entity, commit: true);
             return OkContract(entity);
         }
@@ -44,7 +50,7 @@ namespace WebApi.Domain.Controllers
             TEntity findItem = await Service.FindAsync(id);
             if (findItem == null)
             {
-                return NotFound();
+                return NotFoundContract("");
             }
 
             await Service.RemoveAsync(findItem, commit: true);

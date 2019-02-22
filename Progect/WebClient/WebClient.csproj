@@ -24,10 +24,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="src\Helper\Paterns.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
       <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
       <_ContentIncludedByDefault Remove="e2e\tsconfig.e2e.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <TypeScriptCompile Include="src\Helper\Paterns.ts" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

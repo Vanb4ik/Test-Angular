@@ -30,7 +30,7 @@ export abstract class BaseCrudModule<T extends IIdentifiable> {
   }
 
   protected async watchAsyncProcess(asyncActions: Promise<any>) {
-
+    //debugger
     this.isLoading = true;
 
     return await asyncActions
@@ -38,7 +38,7 @@ export abstract class BaseCrudModule<T extends IIdentifiable> {
         return response
       })
       .catch((err: any) => {
-        return Promise.reject(err);
+        throw new Error(err);
       })
       .finally(
         () => this.isLoading = false

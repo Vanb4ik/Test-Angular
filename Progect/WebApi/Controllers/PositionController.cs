@@ -1,35 +1,25 @@
-/*using System;
+using System;
+using System.Threading.Tasks;
+using infrastructure.DataAccess.Models;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Domain.Attributes;
+using WebApi.Domain.Attributes;
 using WebApi.Domain.Controllers;
 
 namespace WebApi.Controllers
 {
     [ApiRoute("position")]
-    public class PositionController : AuthorizeWebApiBaseController
+    public class PositionController : AuthorizeWebApiBaseController<IPositionService, Position>
     {
-        [HttpGet("{categoryId}")]
-        public IActionResult Get(Guid cayegoryId)
-        {
-            return OkContract(new { });
-        }
+        public PositionController(IPositionService service):base(service)
+        { }
 
-        [HttpDelete("{positionId}")]
-        public IActionResult Delete(string positionId)
+        [HttpGet("getAll/{categoryId}")]
+        public async Task<IActionResult> GetAll(Guid categoryId)
         {
-            return NoContent();
-        }
+            var result = await Service.FindAllByCategoryId(categoryId);
 
-        [HttpPost("")]
-        public IActionResult Post(Category category)
-        {
-            return NoContent();
-        }
-
-        [HttpPut("{positionId}")]
-        public IActionResult Put(Category category)
-        {
-            return NoContent();
+            return OkContract(result);
         }
     }
-}*/
+}

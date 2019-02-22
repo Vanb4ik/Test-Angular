@@ -46,7 +46,7 @@ namespace WebApi.Controllers
                 }
             }
             
-            Category result = await Service.SaveCategoryAsync(category, image?.OpenReadStream());
+            Category result = await Service.SaveCategoryAsync(category, image);
             
             return OkContract(result);
         }

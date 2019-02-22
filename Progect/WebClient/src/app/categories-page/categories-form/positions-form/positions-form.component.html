@@ -4,28 +4,30 @@
       <span>Позиції</span>
     </div>
     <div class="button">
-      <button mat-raised-button (click)="pushToNewCategoriesForm()">
+      <button mat-raised-button (click)="openPositionDialog()">
         <mat-icon aria-label="">add</mat-icon>
         Додати позицію
       </button>
     </div>
   </mat-card-header>
   <mat-card-content>
-    <mat-nav-list *ngIf="data.length >0 ; else empty">
-      <p>-немає позицій-</p>
-      <a mat-list-item *ngFor="let position of data">
+    <mat-nav-list *ngIf="positions.length >0 ; else empty">
+      <a mat-list-item
+         *ngFor="let position of positions"
+         (click)="openPositionDialog(position)"
+         >
         <span>
           {{ position.name }}
           <strong>
-            {{position.cost}}:$
+            {{position.cost}}$
           </strong>
         </span>
-        <span>
-          <mat-icon aria-label="">add</mat-icon>
+        <span (click) ="deletePosition(position)">
+          <mat-icon aria-label="delete_sweep">delete_sweep</mat-icon>
         </span>
       </a>
     </mat-nav-list>
-    
+
   </mat-card-content>
 </mat-card>
 <ng-template #loader>

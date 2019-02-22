@@ -11,13 +11,13 @@ namespace infrastructure.Services
         string AbsolutePas { get; }
     }
 
-    public class ImageDirInfo : IDirInfo
+    public class DirInfo : IDirInfo
     {
        public string RelativePas { get; }
        public string AbsolutePas { get; }
         
 
-        public ImageDirInfo( string relativePas, string absolutePas)
+        public DirInfo( string relativePas, string absolutePas)
         {
             RelativePas = relativePas;
             AbsolutePas = absolutePas;
@@ -26,7 +26,7 @@ namespace infrastructure.Services
 
     public interface IFileStoreService
     {
-        ImageDirInfo GetImageDir();
+        DirInfo GetImageDir();
     }
     
     public class FileStoreService: IFileStoreService
@@ -39,12 +39,11 @@ namespace infrastructure.Services
             _fileStoreConfig = fileStoreConfig.Value;
         }
 
-        public ImageDirInfo GetImageDir()
+        public DirInfo GetImageDir()
         {
             string relativePas = Path.Combine( _fileStoreConfig.RootDir, _fileStoreConfig.ImageDir);;
             string absolutePas = Path.Combine(_env.WebRootPath,relativePas);
-            return new ImageDirInfo(relativePas, absolutePas);
-
+            return new DirInfo(relativePas, absolutePas);
         }
     }
 }

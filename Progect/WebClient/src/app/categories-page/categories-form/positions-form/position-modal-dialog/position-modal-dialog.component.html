@@ -1,0 +1,43 @@
+<form [formGroup] ="form">
+  <h1 mat-dialog-title>Add new position</h1>
+  <div mat-dialog-content >
+    <span *ngIf="!isLoading; else loader">
+      <mat-form-field class="example-full-width">
+        <input matInput
+               required
+               id="name"
+               formControlName="name"
+               value="{{form.value.name}}"
+               placeholder="Position name...">
+        <mat-error *ngIf="form.get('name').invalid">{{getNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput
+               required
+               type="number"
+               id="cost"
+               formControlName="cost"
+               value="{{form.value.cost}}"
+               placeholder="Position cost...">
+        <mat-error *ngIf="form.get('cost').invalid">{{getCostErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button
+            type="button"
+            [disabled]="form.disabled"
+            (click)="onNoClick()"
+            >Cancel</button>
+    <button mat-button
+            type="button"
+            [disabled]="form.disabled || form.invalid"
+            (click)="onSubmitPosition()"
+            cdkFocusInitial
+            >Ok</button>
+  </div>
+</form>
+
+<ng-template #loader>
+  <app-spiner></app-spiner>
+</ng-template>

@@ -87,8 +87,10 @@
     </mat-grid-tile>
   </mat-grid-list>
   <div >
-    <app-positions-form *ngIf="!isNewCategory && categoryToSave.id"
-                        [categoryId]="categoryToSave.id"></app-positions-form>
+    <app-positions-form *ngIf="!isNewCategory"
+                        [categoryId]="route.params.value.id">
+
+    </app-positions-form>
   </div>
 </div>
 
