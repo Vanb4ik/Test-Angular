@@ -60,7 +60,16 @@ export class PositionsFormComponent extends BaseCrudModule<IPosition> implements
     });
   }
   
-  
+  async deletePosition(e: Event, position: IPosition) {
+    e.stopPropagation();
+    try {
+      await this.delete(position);
+      this.initData();
+    } catch (e) {
+
+    }
+    
+  }
 }
 
 

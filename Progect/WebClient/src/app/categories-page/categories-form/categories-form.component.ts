@@ -63,6 +63,7 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
   }
 
   onFileSelect(event: any) {
+    //console.dir(event)
     const file = event.target.files[0];
     this.image = file;
 

@@ -55,12 +55,9 @@ export class PositionModalDialogComponent extends BaseCrudModule<IPosition> impl
       else {
         await this.update(position)
       }
-      
       this.dialogRef.close()
     }
-    catch (e) {
-      
-    }
+    catch (e) {}
     finally {
       form.enable();
     }

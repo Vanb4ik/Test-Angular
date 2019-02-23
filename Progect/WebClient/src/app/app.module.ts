@@ -62,6 +62,8 @@ import { CategoriesPageComponent } from './categories-page/categories-page.compo
 import { CategoriesFormComponent } from './categories-page/categories-form/categories-form.component';
 import { PositionsFormComponent } from './categories-page/categories-form/positions-form/positions-form.component';
 import { PositionModalDialogComponent } from './categories-page/categories-form/positions-form/position-modal-dialog/position-modal-dialog.component';
+import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
+import { OrderPositionsComponent } from './order-page/order-positions/order-positions.component';
 
 
 
@@ -83,6 +85,8 @@ import { PositionModalDialogComponent } from './categories-page/categories-form/
     CategoriesFormComponent,
     PositionsFormComponent,
     PositionModalDialogComponent,
+    OrderCategoriesComponent,
+    OrderPositionsComponent,
   ],
   imports: [
     HttpClientModule,

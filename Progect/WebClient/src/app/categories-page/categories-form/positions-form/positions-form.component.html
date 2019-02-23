@@ -11,18 +11,21 @@
     </div>
   </mat-card-header>
   <mat-card-content>
-    <mat-nav-list *ngIf="positions.length >0 ; else empty">
+    <mat-nav-list style="width:100%"
+                  *ngIf="positions.length >0 ; else empty">
       <a mat-list-item
          *ngFor="let position of positions"
-         (click)="openPositionDialog(position)"
-         >
-        <span>
+         (click)="openPositionDialog(position)">
+        <span class="text">
           {{ position.name }}
           <strong>
             {{position.cost}}$
           </strong>
         </span>
-        <span (click) ="deletePosition(position)">
+        <span
+              class="button"
+              (click) ="deletePosition($event, position)
+              ">
           <mat-icon aria-label="delete_sweep">delete_sweep</mat-icon>
         </span>
       </a>
