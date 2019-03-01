@@ -1,7 +1,7 @@
 .pageTitle, .pageTitleText, .pageTitleButton {
   display: flex;
   justify-content: flex-start;
-  align-content: center;
+  align-items: center;
 
   &Text {
     width: 50%;
@@ -9,52 +9,10 @@
 
   &Button {
     width: 50%;
+    height: auto;
     justify-content: flex-end;
+    flex-shrink: 0;
+
   }
 }
-.container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-wrap: wrap;
 
-  .wrapper {
-    width: 30%;
-    min-width: 290px;
-    min-height: 100px;
-    align-items: center;
-    justify-content: flex-start;
-    display: flex;
-
-    .example-card, .imageBox, .image, .textBox, .text {
-      align-items: center;
-      justify-content: center;
-      width: 250px;
-      max-height: 150px;
-      
-      margin: 0;
-      display: flex;
-
-      .imageBox {
-        width: 100%;
-        height: auto;
-        .image {
-          height:auto;
-          max-width: 70px;
-          max-height: 70px;
-        }
-      }
-
-      .text {
-        //justify-content: flex-start;
-        height:15px;
-        text-align: center;
-        max-height: 80px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: inline-block;
-      }
-    }
-  }
-}

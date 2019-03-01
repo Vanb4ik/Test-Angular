@@ -64,6 +64,7 @@ import { PositionsFormComponent } from './categories-page/categories-form/positi
 import { PositionModalDialogComponent } from './categories-page/categories-form/positions-form/position-modal-dialog/position-modal-dialog.component';
 import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
 import { OrderPositionsComponent } from './order-page/order-positions/order-positions.component';
+import { OrderPageDialogComponent } from './order-page/order-page-dialog/order-page-dialog.component';
 
 
 
@@ -87,6 +88,7 @@ import { OrderPositionsComponent } from './order-page/order-positions/order-posi
     PositionModalDialogComponent,
     OrderCategoriesComponent,
     OrderPositionsComponent,
+    OrderPageDialogComponent,
   ],
   imports: [
     HttpClientModule,
@@ -142,7 +144,7 @@ import { OrderPositionsComponent } from './order-page/order-positions/order-posi
     MatTooltipModule,
     MatTreeModule,
   ],
-  entryComponents: [PositionModalDialogComponent],
+  entryComponents: [PositionModalDialogComponent, OrderPageDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

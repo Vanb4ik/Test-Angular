@@ -1,37 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { ICategory } from 'src/models/ICategory';
-import { BaseCrudModule } from 'src/modules/BaseCrudModule';
-import { ICrudApiClient } from 'src/services/API/CrudApiClient';
-import { CategoryClient } from 'src/services/API/Clients/CategoryClient';
-import { IAPIResponse } from 'src/models/IAPIResponse';
+import { Router, NavigationEnd } from '@angular/router';
+import { ConstantsUrl } from 'src/Helper/ConstantsUrl';
+import { MatDialog } from '@angular/material';
+import { OrderPageDialogComponent } from './order-page-dialog/order-page-dialog.component';
 
 @Component({
   selector: 'app-order-page',
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.scss']
 })
-export class OrderPageComponent extends BaseCrudModule<ICategory> implements OnInit {
-    protected _rootApiClient:CategoryClient;
+export class OrderPageComponent implements OnInit {
 
-  data: ICategory[] = [];
-  constructor(private categoryClient: CategoryClient) {
-    super();
+  private rootOrderUrl = "/" + ConstantsUrl.ORDER;
+  private isRoot: boolean;
 
-    this._rootApiClient = categoryClient;
+  constructor(private router: Router, private dialog: MatDialog, ) {
+
   }
 
+  private checkUrl() {
+    this.isRoot = this.router.url == this.rootOrderUrl;
+  }
   ngOnInit() {
-    this.initData()
+    this.checkUrl();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.checkUrl();
+      }
+    })
   }
 
-  async initData() {
+  openOrderDialog() {
+    const dialogRef = this.dialog.open(OrderPageDialogComponent, {
+      width: '600px',
+      data: {}
+    });
 
-   const response:IAPIResponse = await this.watchAsyncProcess(
-      this._rootApiClient.getAllCategory()
-    )
-    if (response.error) {
-      return;
-    }
-    this.data = response.payload
+    dialogRef.afterClosed().subscribe((result) => {
+      
+    });
   }
 }

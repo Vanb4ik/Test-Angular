@@ -7,7 +7,6 @@ import { BaseCrudModule } from 'src/modules/BaseCrudModule';
 import { ICrudApiClient } from 'src/services/API/CrudApiClient';
 import { PositionClient } from 'src/services/API/Clients/PositionClient';
 import { HelperConst } from 'src/Helper/HelperConst';
-import { IAPIResponse } from 'src/models/IAPIResponse';
 
 @Component({
   selector: 'app-position-modal-dialog',

@@ -1,48 +1,24 @@
-<div *ngIf="!isLoading; else loader">
 
-  <div class="pageTitle">
-    <span class="pageTitleText">
-      <h4>Замовлення</h4>
-    </span>
 
-    <span class="pageTitleButton">
-      <button mat-raised-button>
-        Завершити
-      </button>
-    </span>
+<div class="pageTitle">
+  <span class="pageTitleText">
+    <h4 class="pageTitleText" *ngIf ="isRoot">Замовлення</h4>
+    <h4 class="pageTitleText" *ngIf ="!isRoot">
+      <a routerLink={{rootOrderUrl}}>Замовлення</a>
+      <i class="material-icons">
+        keyboard_arrow_right
+      </i>
+      Добавити продукцію
+    </h4>
+  </span>
 
-  </div>
-
-  <div class="container"
-       *ngIf="data.length>0; else empty">
-    <div *ngFor="let category of data">
-      <div class="wrapper">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <div class="imageBox">
-              <img class="image" src={{category.imageSrc}} alt="cat" />
-            </div>
-            <div class="textBox">
-              <p class="text">
-                {{category.name}}
-              </p>
-            </div>
-
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    
-  </div>
-
+  <span class="pageTitleButton">
+    <button mat-raised-button
+            (click)="openOrderDialog()"
+            >
+      Завершити
+    </button>
+  </span>
 </div>
 
-<ng-template #empty>
-  <div class="center">
-    <p>-немає категорій-</p>
-  </div>
-</ng-template>
-
-<ng-template #loader>
-  <app-spiner></app-spiner>
-</ng-template>
+<router-outlet></router-outlet>

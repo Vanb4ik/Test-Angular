@@ -30,7 +30,7 @@ const routes: Routes = [
       {
         path: ConstantsUrl.ORDER, component: OrderPageComponent, children: [
           { path: "", component: OrderCategoriesComponent },
-          { path: ":id", component: OrderPositionsComponent },
+          { path: ":id", component: OrderPositionsComponent }
         ]
       },
       {path: ConstantsUrl.CATEGORIES, component: CategoriesPageComponent},

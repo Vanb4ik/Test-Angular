@@ -65,10 +65,8 @@ export class PositionsFormComponent extends BaseCrudModule<IPosition> implements
     try {
       await this.delete(position);
       this.initData();
-    } catch (e) {
-
     }
-    
+    catch (e) {}
   }
 }
 
