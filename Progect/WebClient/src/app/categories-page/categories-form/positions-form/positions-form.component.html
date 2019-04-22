@@ -22,12 +22,16 @@
             {{position.cost}}$
           </strong>
         </span>
-        <span
-              class="button"
-              (click) ="deletePosition($event, position)
-              ">
-          <mat-icon aria-label="delete_sweep">delete_sweep</mat-icon>
+        <span class="button">
+          <button 
+                  mat-mini-fab
+                  aria-label="delete_sweep"
+                  color="warn"
+                  (click)="deletePosition($event, position)">
+            <mat-icon>delete_sweep</mat-icon>
+          </button>
         </span>
+        
       </a>
     </mat-nav-list>
 

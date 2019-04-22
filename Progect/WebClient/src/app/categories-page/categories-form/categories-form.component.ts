@@ -39,6 +39,15 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
       name: fb.control('', [Validators.required]),
     });
   }
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      const catId = params['id'];
+      if (catId != ConstantsUrl.NEW_CATEGORIES) {
+        this.isNewCategory = false;
+        this.initData(catId)
+      }
+    })
+  }
 
   getEmptyCategory(): ICategory {
     return {
@@ -102,16 +111,6 @@ export class CategoriesFormComponent extends BaseCrudModule<ICategory> implement
     return this.watchAsyncProcess(
       this._rootApiClient.create(category, image)
     )
-  }
-
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      const catId = params['id'];
-      if (catId != ConstantsUrl.NEW_CATEGORIES) {
-        this.isNewCategory = false;
-        this.initData(catId)
-      }
-    })
   }
 
   deleteCategory() {

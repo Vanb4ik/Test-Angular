@@ -1,3 +1,62 @@
-<p>
-  order-positions works!
-</p>
+<div mat-dialog-content>
+  <div *ngIf="!isLoading; else loader">
+    <div class="mat-elevation-z8">
+      <table mat-table class="main-table" [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef> Count </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field >
+              <input matInput
+                     required
+                     type="number"
+                     id="cost"
+                     value="1"
+                     min="1"
+                     placeholder="Position cost...">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+       
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef> Options </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button
+                    (click)="deletePosition($event, element)">
+              Додати
+            </button>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!--<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>-->
+      <mat-paginator [length]="length"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="changePaginatorHandler($event)">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-spiner></app-spiner>
+</ng-template>

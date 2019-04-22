@@ -21,6 +21,7 @@ export class OrderPageComponent implements OnInit {
   private checkUrl() {
     this.isRoot = this.router.url == this.rootOrderUrl;
   }
+
   ngOnInit() {
     this.checkUrl();
     this.router.events.subscribe(event => {

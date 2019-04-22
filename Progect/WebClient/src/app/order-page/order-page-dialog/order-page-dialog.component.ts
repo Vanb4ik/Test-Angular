@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseCrudModule } from 'src/modules/BaseCrudModule';
 import { IPosition } from 'src/models/IPosition';
 import { ICrudApiClient } from 'src/services/API/CrudApiClient';
-import { MatTableDataSource, MatPaginator, PageEvent } from '@angular/material';
+import { MatTableDataSource, MatPaginator, PageEvent, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-order-page-dialog',
@@ -16,16 +16,15 @@ export class OrderPageDialogComponent extends BaseCrudModule<IPosition> implemen
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<OrderPageDialogComponent>) {
     super();
   }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'options'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-   
   }
 
   changePAginatorHandler(event: PageEvent) {
@@ -34,6 +33,21 @@ export class OrderPageDialogComponent extends BaseCrudModule<IPosition> implemen
       { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
       { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' }
     ]
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmitPosition() {
+    debugger
+    //const { form, } = this;
+    //const updatePosition: IPosition = { ...this.data, name: form.value.name, cost: form.value.cost }
+    //this.submitPositionHandler(updatePosition)
+  }
+  async deletePosition(e: Event, element: any) {
+    e.stopPropagation();
+    console.dir(element)
   }
 }
 
@@ -45,7 +59,7 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
   { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
   { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },

@@ -36,7 +36,6 @@ export class CategoriesPageComponent extends BaseCrudModule<ICategory> implement
     catch (e) {
       console.dir(e)
     }
-
   }
 
   pushToNewCategoriesForm(){
